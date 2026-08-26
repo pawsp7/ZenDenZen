@@ -6,8 +6,8 @@ const mixkit = (id) => ({
 const CLIPS = {
   mountains: { ...mixkit(35085), rate: 0.34 },
   spa: { ...mixkit(27626), rate: 0.38 },
-  garden: { ...mixkit(44970), rate: 0.36 },
-  meadow: { ...mixkit(16018), rate: 0.34 },
+  garden: { ...mixkit(44970), rate: 0.28 },
+  meadow: { ...mixkit(566), rate: 0.4 },
 };
 
 class AmbientView {

@@ -13,7 +13,7 @@ const SCENES = {
   },
   meadow: {
     title: "Meadow",
-    blurb: "Lavender in the wind, a wide sky, late-day color.",
+    blurb: "Lavender swaying in a quiet breeze.",
   },
 };
 

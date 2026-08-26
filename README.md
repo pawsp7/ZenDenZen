@@ -18,6 +18,6 @@ Films and spa audio from [Mixkit](https://mixkit.co/).
 - Green mountainous valley during a sunny summer
 - Infinity pool with sunshine and ripples
 - Cherry blossoms lining a garden path
-- Lavender field landscape
+- Lavender flowers swaying in a field
 - *Rest Now* by Eugenio Mininni
 - *Smooth Meditation* by Arulo
