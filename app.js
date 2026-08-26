@@ -2,7 +2,7 @@ const SCENES = {
   mountains: {
     title: "Mountains",
     blurb: "Alpine light, drifting cloud, quiet peaks.",
-    clips: [4131, 4153, 4115, 4998, 4157],
+    clips: [4131, 4366, 4396, 4132, 4283, 4115, 4998],
   },
   spa: {
     title: "Spa",
@@ -12,12 +12,12 @@ const SCENES = {
   garden: {
     title: "Garden",
     blurb: "Evening blooms, garden paths, a slow golden hour.",
-    clips: [4205, 1168, 2854],
+    clips: [4205, 1168],
   },
   meadow: {
     title: "Meadow",
     blurb: "Open fields, wildflowers, air moving through grass.",
-    clips: [41395, 4075, 1187],
+    clips: [41395, 4075, 2854],
   },
 };
 
