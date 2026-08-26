@@ -157,13 +157,13 @@ class AmbientView {
     this._sky(ctx, w, h, "#4db8ff", "#9fe4ff", "#ffe7a8");
     this._sun(ctx, w * 0.78, h * 0.2, h * 0.12, t);
     this._driftClouds(ctx, w, h, t, 0.55);
-    this._range(ctx, w, h, [[0, 0.58], [0.18, 0.42], [0.32, 0.5], [0.5, 0.3], [0.68, 0.46], [0.84, 0.36], [1, 0.52]], "#f7fbff");
-    this._range(ctx, w, h, [[0, 0.66], [0.16, 0.54], [0.34, 0.62], [0.52, 0.48], [0.7, 0.6], [0.88, 0.5], [1, 0.64]], "#c9ecff");
-    this._range(ctx, w, h, [[0, 0.78], [0.22, 0.68], [0.4, 0.74], [0.6, 0.66], [0.8, 0.73], [1, 0.7]], "#8fe08a");
+    this._range(ctx, w, h, [[0, 0.48], [0.18, 0.32], [0.32, 0.4], [0.5, 0.22], [0.68, 0.36], [0.84, 0.26], [1, 0.42]], "#f7fbff");
+    this._range(ctx, w, h, [[0, 0.56], [0.16, 0.44], [0.34, 0.52], [0.52, 0.38], [0.7, 0.5], [0.88, 0.4], [1, 0.54]], "#c9ecff");
+    this._range(ctx, w, h, [[0, 0.64], [0.22, 0.54], [0.4, 0.6], [0.6, 0.52], [0.8, 0.59], [1, 0.56]], "#8fe08a");
     ctx.fillStyle = "#b6f08f";
-    ctx.fillRect(0, h * 0.78, w, h * 0.22);
-    this._pines(ctx, w, h, t, h * 0.8);
-    this._wildflowers(ctx, w, h, t, 0.82, 18, ["#ffd84a", "#fff6d8", "#ff8fab"]);
+    ctx.fillRect(0, h * 0.62, w, h * 0.38);
+    this._pines(ctx, w, h, t, h * 0.64);
+    this._wildflowers(ctx, w, h, t, 0.66, 18, ["#ffd84a", "#fff6d8", "#ff8fab"]);
   }
 
   _spa(ctx, w, h, t) {
@@ -171,7 +171,7 @@ class AmbientView {
     const sunX = w * 0.5;
     const sunY = h * 0.18;
     this._sun(ctx, sunX, sunY, h * 0.14, t);
-    const waterTop = h * 0.46;
+    const waterTop = h * 0.36;
     const water = ctx.createLinearGradient(0, waterTop, 0, h);
     water.addColorStop(0, "#b9fff6");
     water.addColorStop(0.45, "#62e4de");
@@ -275,8 +275,8 @@ class AmbientView {
     ctx.translate(x, y);
     ctx.fillStyle = i % 2 ? "#ff9f43" : "#ff6fa1";
     ctx.beginPath();
-    ctx.ellipse(-8, 0, 8 * flap, 6, -0.4, 0, Math.PI * 2);
-    ctx.ellipse(8, 0, 8 * flap, 6, 0.4, 0, Math.PI * 2);
+    ctx.ellipse(-11, 0, 12 * flap, 8, -0.4, 0, Math.PI * 2);
+    ctx.ellipse(11, 0, 12 * flap, 8, 0.4, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = "#4a3b2f";
     ctx.fillRect(-1, -6, 2, 12);
@@ -289,24 +289,24 @@ class AmbientView {
     this._driftClouds(ctx, w, h, t, 0.42);
     ctx.fillStyle = "#7ee08a";
     ctx.beginPath();
-    ctx.moveTo(0, h * 0.58);
-    ctx.quadraticCurveTo(w * 0.35, h * 0.5, w, h * 0.6);
+    ctx.moveTo(0, h * 0.42);
+    ctx.quadraticCurveTo(w * 0.35, h * 0.36, w, h * 0.44);
     ctx.lineTo(w, h);
     ctx.lineTo(0, h);
     ctx.fill();
     ctx.fillStyle = "#f6d58a";
     ctx.beginPath();
-    ctx.moveTo(w * 0.38, h);
-    ctx.quadraticCurveTo(w * 0.5, h * 0.62, w * 0.64, h);
+    ctx.moveTo(w * 0.36, h);
+    ctx.quadraticCurveTo(w * 0.5, h * 0.46, w * 0.66, h);
     ctx.fill();
     ctx.fillStyle = "#4eca70";
-    ctx.fillRect(0, h * 0.7, w * 0.28, h * 0.3);
-    ctx.fillRect(w * 0.74, h * 0.68, w * 0.26, h * 0.32);
+    ctx.fillRect(0, h * 0.52, w * 0.3, h * 0.48);
+    ctx.fillRect(w * 0.72, h * 0.5, w * 0.28, h * 0.5);
     const blooms = ["#ff6fa1", "#ff9ec8", "#ffb347", "#ff7a59", "#c9f06a"];
     for (let i = 0; i < 16; i += 1) {
       const left = i < 8;
       const x = (left ? 0.04 : 0.78) * w + (i % 8) * w * 0.03;
-      const y = h * (0.62 + (i % 5) * 0.05);
+      const y = h * (0.46 + (i % 5) * 0.05);
       this._flower(ctx, x, y, 11 + (i % 3) * 2, blooms[i % blooms.length], t, i);
     }
     this.petals.forEach((p, i) => {
@@ -332,13 +332,13 @@ class AmbientView {
     this._sky(ctx, w, h, "#3eb6ff", "#9adaff", "#ffe9a6");
     this._sun(ctx, w * 0.82, h * 0.16, h * 0.12, t);
     this._driftClouds(ctx, w, h, t, 0.5);
-    this._range(ctx, w, h, [[0, 0.62], [0.25, 0.54], [0.5, 0.6], [0.75, 0.52], [1, 0.58]], "#9aea78");
-    this._range(ctx, w, h, [[0, 0.72], [0.2, 0.66], [0.45, 0.7], [0.7, 0.64], [1, 0.7]], "#b6f56a");
+    this._range(ctx, w, h, [[0, 0.48], [0.25, 0.4], [0.5, 0.46], [0.75, 0.38], [1, 0.44]], "#9aea78");
+    this._range(ctx, w, h, [[0, 0.56], [0.2, 0.5], [0.45, 0.54], [0.7, 0.48], [1, 0.54]], "#b6f56a");
     ctx.fillStyle = "#d0ff86";
-    ctx.fillRect(0, h * 0.74, w, h * 0.26);
+    ctx.fillRect(0, h * 0.56, w, h * 0.44);
     for (let i = 0; i < 40; i += 1) {
       const x = ((i * 0.041) % 1) * w;
-      const base = h * 0.78 + (i % 7) * 8;
+      const base = h * 0.6 + (i % 7) * 8;
       const sway = Math.sin(t * 0.6 + i * 0.4) * 6;
       ctx.strokeStyle = i % 2 ? "#5ed66a" : "#7ae56f";
       ctx.lineWidth = 2;
@@ -347,7 +347,7 @@ class AmbientView {
       ctx.quadraticCurveTo(x + sway, base + 12, x + sway * 1.4, base);
       ctx.stroke();
     }
-    this._wildflowers(ctx, w, h, t, 0.76, 28, ["#ffe14a", "#ffffff", "#ff8fab", "#ffb347"]);
+    this._wildflowers(ctx, w, h, t, 0.58, 28, ["#ffe14a", "#ffffff", "#ff8fab", "#ffb347"]);
     for (let i = 0; i < 3; i += 1) {
       const x = w * (0.2 + i * 0.28) + Math.sin(t * 0.2 + i) * 50;
       const y = h * (0.28 + Math.sin(t * 0.3 + i) * 0.05);
