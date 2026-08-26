@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0c0b0a" />
+    <meta
+      name="description"
+      content="ZenDenZen streams ambient mountain, spa, garden, and meadow films with relaxing spa audio."
+    />
+    <meta property="og:title" content="ZenDenZen" />
+    <meta
+      property="og:description"
+      content="Ambient films. Spa sound. A quiet place to land."
+    />
+    <meta property="og:type" content="website" />
+    <title>ZenDenZen — ambient films & spa sound</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://assets.mixkit.co" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="stage" aria-hidden="true">
+      <video id="videoA" class="film is-front" playsinline muted loop></video>
+      <video id="videoB" class="film" playsinline muted></video>
+      <div class="wash"></div>
+      <div class="vignette"></div>
+      <div class="grain"></div>
+    </div>
+
+    <div id="gate" class="gate">
+      <div class="gate-card">
+        <p class="eyebrow">A quiet streaming den</p>
+        <h1>ZenDenZen</h1>
+        <p class="lede">
+          Ambient films of mountains, spa, garden, and meadow, with relaxing spa
+          audio beside them.
+        </p>
+        <button id="enterBtn" class="enter" type="button">Enter the den</button>
+        <p class="hint">Click once to start picture and sound together.</p>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <div class="brand">
+        <img src="./favicon.svg" width="28" height="28" alt="" />
+        <span>ZenDenZen</span>
+      </div>
+      <p id="nowPlaying" class="now-playing">Spa sound ready</p>
+    </header>
+
+    <section class="hud" aria-label="Playback controls">
+      <div class="scene-copy">
+        <p id="sceneKicker" class="kicker">Now streaming</p>
+        <h2 id="sceneTitle">Mountains</h2>
+        <p id="sceneBlurb">Alpine light, drifting cloud, quiet peaks.</p>
+      </div>
+
+      <div class="scene-row" role="tablist" aria-label="Ambient scenes">
+        <button class="scene is-active" data-scene="mountains" type="button" role="tab" aria-selected="true">
+          <span class="scene-icon" aria-hidden="true">⛰</span>
+          Mountains
+        </button>
+        <button class="scene" data-scene="spa" type="button" role="tab" aria-selected="false">
+          <span class="scene-icon" aria-hidden="true">♨</span>
+          Spa
+        </button>
+        <button class="scene" data-scene="garden" type="button" role="tab" aria-selected="false">
+          <span class="scene-icon" aria-hidden="true">❀</span>
+          Garden
+        </button>
+        <button class="scene" data-scene="meadow" type="button" role="tab" aria-selected="false">
+          <span class="scene-icon" aria-hidden="true">🌿</span>
+          Meadow
+        </button>
+      </div>
+
+      <div class="transport">
+        <button id="playBtn" class="icon-btn" type="button" aria-label="Pause">
+          <svg id="playIcon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+            <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+          </svg>
+        </button>
+        <label class="volume">
+          <span class="sr-only">Volume</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 10v4h3l5 4V6L7 10H4z" fill="currentColor"></path>
+            <path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+          <input id="volume" type="range" min="0" max="100" value="72" />
+        </label>
+        <button id="muteBtn" class="text-btn" type="button">Sound on</button>
+        <button id="fullscreenBtn" class="text-btn" type="button">Fullscreen</button>
+      </div>
+    </section>
+
+    <footer class="credits">
+      Films stream from Mixkit. Spa audio by Eugenio Mininni &amp; Arulo via Mixkit,
+      with a live spa bed in the den.
+    </footer>
+
+    <script src="./audio.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
