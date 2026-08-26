@@ -66,40 +66,32 @@ body {
   opacity: 1;
 }
 
+.still,
 .plate,
 .atmosphere {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+.still {
+  filter: saturate(1.08) brightness(1.04) contrast(1.03);
 }
 
 .plate {
-  inset: -10%;
-  width: 120%;
-  height: 120%;
-  object-fit: cover;
-  filter: saturate(1.14) brightness(1.06) contrast(1.04);
-  animation: ken 96s ease-in-out infinite alternate;
-  transform-origin: center center;
+  opacity: 0;
+  filter: saturate(1.08) brightness(1.04) contrast(1.03);
+  transition: opacity 0.9s ease;
+}
+
+.film.has-video .plate {
+  opacity: 1;
 }
 
 .atmosphere {
   pointer-events: none;
-}
-
-body.is-paused .plate,
-.film.is-paused .plate {
-  animation-play-state: paused;
-}
-
-@keyframes ken {
-  from {
-    transform: scale(1) translate(0, 0);
-  }
-  to {
-    transform: scale(1.08) translate(-2.2%, -1.4%);
-  }
 }
 
 .wash {
@@ -414,6 +406,6 @@ body.is-idle {
   }
 
   .plate {
-    animation: none;
+    opacity: 0 !important;
   }
 }

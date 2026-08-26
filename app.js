@@ -1,19 +1,19 @@
 const SCENES = {
   mountains: {
     title: "Mountains",
-    blurb: "Sunlit peaks, slow clouds, a bright alpine day.",
+    blurb: "A sunny alpine valley, drifting cloud, living light.",
   },
   spa: {
     title: "Spa",
-    blurb: "Warm water, still deck, gold afternoon light.",
+    blurb: "Warm pool light, slow ripples, a quiet afternoon.",
   },
   garden: {
     title: "Garden",
-    blurb: "Sunny blooms, a garden path, a clear blue sky.",
+    blurb: "Blossoms over a garden path, sun on the grass.",
   },
   meadow: {
     title: "Meadow",
-    blurb: "Lavender rows, a wide sky, late-day color.",
+    blurb: "Lavender in the wind, a wide sky, late-day color.",
   },
 };
 
@@ -43,9 +43,9 @@ let playing = true;
 let idleTimer = 0;
 let entered = false;
 
-Object.values(PLATES).forEach((src) => {
+Object.values(CLIPS).forEach((clip) => {
   const img = new Image();
-  img.src = src;
+  img.src = clip.poster;
 });
 
 viewA.setScene("mountains");
