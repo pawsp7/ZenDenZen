@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#0c0b0a" />
+    <meta name="theme-color" content="#7ec8ff" />
     <meta
       name="description"
-      content="ZenDenZen streams ambient mountain, spa, garden, and meadow films with relaxing spa audio."
+      content="ZenDenZen plays slow, bright ambient views of mountains, spa, garden, and meadow with relaxing spa audio."
     />
     <meta property="og:title" content="ZenDenZen" />
     <meta
       property="og:description"
-      content="Ambient films. Spa sound. A quiet place to land."
+      content="Slow painted views. Bright color. Spa sound."
     />
     <meta property="og:type" content="website" />
-    <title>ZenDenZen — ambient films & spa sound</title>
+    <title>ZenDenZen — slow bright views & spa sound</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,11 +27,10 @@
   </head>
   <body>
     <div class="stage" aria-hidden="true">
-      <video id="videoA" class="film is-front" playsinline muted loop></video>
-      <video id="videoB" class="film" playsinline muted></video>
+      <canvas id="viewA" class="film is-front"></canvas>
+      <canvas id="viewB" class="film"></canvas>
       <div class="wash"></div>
       <div class="vignette"></div>
-      <div class="grain"></div>
     </div>
 
     <div id="gate" class="gate">
@@ -39,8 +38,8 @@
         <p class="eyebrow">A quiet streaming den</p>
         <h1>ZenDenZen</h1>
         <p class="lede">
-          Ambient films of mountains, spa, garden, and meadow, with relaxing spa
-          audio beside them.
+          Slow, bright views of mountains, spa, garden, and meadow, with relaxing
+          spa audio beside them.
         </p>
         <button id="enterBtn" class="enter" type="button">Enter the den</button>
         <p class="hint">Click once to start picture and sound together.</p>
@@ -57,9 +56,9 @@
 
     <section class="hud" aria-label="Playback controls">
       <div class="scene-copy">
-        <p id="sceneKicker" class="kicker">Now streaming</p>
+        <p id="sceneKicker" class="kicker">Now viewing</p>
         <h2 id="sceneTitle">Mountains</h2>
-        <p id="sceneBlurb">Alpine light, drifting cloud, quiet peaks.</p>
+        <p id="sceneBlurb">Sunlit peaks, slow clouds, a bright alpine day.</p>
       </div>
 
       <div class="scene-row" role="tablist" aria-label="Ambient scenes">
@@ -102,11 +101,11 @@
     </section>
 
     <footer class="credits">
-      Films stream from Mixkit. Spa audio by Eugenio Mininni &amp; Arulo via Mixkit,
-      with a live spa bed in the den.
+      Slow painted views in the den. Spa audio by Eugenio Mininni &amp; Arulo via Mixkit.
     </footer>
 
     <script src="./audio.js"></script>
+    <script src="./scenes.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

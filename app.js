@@ -1,31 +1,26 @@
 const SCENES = {
   mountains: {
     title: "Mountains",
-    blurb: "Alpine light, drifting cloud, quiet peaks.",
-    clips: [4131, 4366, 4396, 4132, 4283, 4115, 4998],
+    blurb: "Sunlit peaks, slow clouds, a bright alpine day.",
   },
   spa: {
     title: "Spa",
-    blurb: "Candle glow, still water, a warm indoor hush.",
-    clips: [3453, 43064, 43076, 1280],
+    blurb: "Warm water, floating blossoms, gold light.",
   },
   garden: {
     title: "Garden",
-    blurb: "Evening blooms, garden paths, a slow golden hour.",
-    clips: [4205, 1168],
+    blurb: "Sunny blooms, slow petals, a happy garden path.",
   },
   meadow: {
     title: "Meadow",
-    blurb: "Open fields, wildflowers, air moving through grass.",
-    clips: [41395, 4075, 2854],
+    blurb: "Wildflowers, swaying grass, a wide blue sky.",
   },
 };
 
-const mixkitUrl = (id) => `https://assets.mixkit.co/videos/${id}/${id}-720.mp4`;
-const mixkitPoster = (id) => `https://assets.mixkit.co/videos/${id}/${id}-thumb-720-0.jpg`;
-
-const videoA = document.getElementById("videoA");
-const videoB = document.getElementById("videoB");
+const canvasA = document.getElementById("viewA");
+const canvasB = document.getElementById("viewB");
+const viewA = new AmbientView(canvasA);
+const viewB = new AmbientView(canvasB);
 const gate = document.getElementById("gate");
 const enterBtn = document.getElementById("enterBtn");
 const playBtn = document.getElementById("playBtn");
@@ -40,88 +35,25 @@ const sceneButtons = [...document.querySelectorAll(".scene")];
 
 const sound = new SpaSoundscape();
 let activeScene = "mountains";
-let clipIndex = 0;
-let front = videoA;
-let back = videoB;
+let front = canvasA;
+let back = canvasB;
+let frontView = viewA;
+let backView = viewB;
 let playing = true;
 let idleTimer = 0;
 let entered = false;
 
-function currentClips() {
-  return SCENES[activeScene].clips;
-}
-
-function nextClipId(fromIndex = clipIndex) {
-  const clips = currentClips();
-  return clips[(fromIndex + 1) % clips.length];
-}
-
-function loadInto(video, id) {
-  video.poster = mixkitPoster(id);
-  if (video.dataset.clip === String(id) && video.src) return Promise.resolve();
-  video.dataset.clip = String(id);
-  video.src = mixkitUrl(id);
-  video.load();
-  return new Promise((resolve, reject) => {
-    const ok = () => {
-      cleanup();
-      resolve();
-    };
-    const fail = () => {
-      cleanup();
-      reject(new Error(`clip ${id} failed`));
-    };
-    const cleanup = () => {
-      video.removeEventListener("canplay", ok);
-      video.removeEventListener("error", fail);
-    };
-    video.addEventListener("canplay", ok, { once: true });
-    video.addEventListener("error", fail, { once: true });
-  });
-}
-
-async function showClip(id, { fade = true } = {}) {
-  try {
-    await loadInto(back, id);
-  } catch (err) {
-    const clips = currentClips().filter((clip) => clip !== id);
-    if (!clips.length) return;
-    clipIndex = currentClips().indexOf(clips[0]);
-    return showClip(clips[0], { fade });
-  }
-
-  back.loop = currentClips().length === 1;
-  const playPromise = back.play();
-  if (playPromise) playPromise.catch(() => {});
-
-  if (fade) {
-    back.classList.add("is-front");
-    front.classList.remove("is-front");
-  } else {
-    back.classList.add("is-front");
-    front.classList.remove("is-front");
-    front.pause();
-  }
-
-  const previous = front;
-  front = back;
-  back = previous;
-  clipIndex = currentClips().indexOf(id);
-  window.setTimeout(() => {
-    if (back !== front) back.pause();
-  }, 1500);
-  preloadNext();
-}
-
-function preloadNext() {
-  const upcoming = nextClipId();
-  if (String(upcoming) === back.dataset.clip) return;
-  loadInto(back, upcoming).catch(() => {});
-}
+viewA.setScene("mountains");
+viewB.setScene("mountains");
+viewA.start();
+viewB.start();
+window.addEventListener("load", () => {
+  viewA.resize();
+  viewB.resize();
+});
 
 function applyScene(name, { fade = true } = {}) {
   activeScene = name;
-  clipIndex = 0;
   const scene = SCENES[name];
   sceneTitle.textContent = scene.title;
   sceneBlurb.textContent = scene.blurb;
@@ -130,26 +62,46 @@ function applyScene(name, { fade = true } = {}) {
     button.classList.toggle("is-active", selected);
     button.setAttribute("aria-selected", String(selected));
   });
+  document.body.dataset.scene = name;
   document.body.style.setProperty(
     "--gold",
-    { mountains: "#c4a574", spa: "#d7c4b0", garden: "#b7c89a", meadow: "#e0d08a" }[name]
+    { mountains: "#f0c36a", spa: "#ffb38a", garden: "#7ed38a", meadow: "#ffe14a" }[name]
   );
   sound.setScene(name);
-  showClip(scene.clips[0], { fade });
+
+  if (!fade || frontView.scene === name) {
+    frontView.setScene(name);
+    front.classList.add("is-front");
+    back.classList.remove("is-front");
+    updateNowPlaying();
+    return;
+  }
+
+  backView.setScene(name);
+  backView.setPlaying(playing);
+  requestAnimationFrame(() => {
+    back.classList.add("is-front");
+    front.classList.remove("is-front");
+    const previousCanvas = front;
+    const previousView = frontView;
+    front = back;
+    frontView = backView;
+    back = previousCanvas;
+    backView = previousView;
+  });
   updateNowPlaying();
 }
 
 function setPlaying(next) {
   playing = next;
+  frontView.setPlaying(playing);
+  backView.setPlaying(playing);
   if (playing) {
-    front.play().catch(() => {});
     if (entered) sound.resume();
     playBtn.setAttribute("aria-label", "Pause");
     playIcon.innerHTML =
       '<rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect>';
   } else {
-    front.pause();
-    back.pause();
     if (entered) sound.pause();
     playBtn.setAttribute("aria-label", "Play");
     playIcon.innerHTML = '<path d="M8 5v14l11-7z"></path>';
@@ -181,14 +133,6 @@ async function enter() {
   updateNowPlaying();
   bumpIdle();
 }
-
-function onClipEnded(event) {
-  if (!playing || event.target !== front) return;
-  showClip(nextClipId());
-}
-
-videoA.addEventListener("ended", onClipEnded);
-videoB.addEventListener("ended", onClipEnded);
 
 enterBtn.addEventListener("click", enter);
 
@@ -252,6 +196,4 @@ document.addEventListener("keydown", (event) => {
 });
 
 applyScene("mountains", { fade: false });
-front.muted = true;
-front.play().catch(() => {});
 updateNowPlaying();
