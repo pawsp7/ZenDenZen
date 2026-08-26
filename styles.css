@@ -57,12 +57,49 @@ body {
   width: 100%;
   height: 100%;
   display: block;
+  overflow: hidden;
   opacity: 0;
   transition: opacity 1.6s ease;
 }
 
 .film.is-front {
   opacity: 1;
+}
+
+.plate,
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.plate {
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  filter: saturate(1.14) brightness(1.06) contrast(1.04);
+  animation: ken 96s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+.atmosphere {
+  pointer-events: none;
+}
+
+body.is-paused .plate,
+.film.is-paused .plate {
+  animation-play-state: paused;
+}
+
+@keyframes ken {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.08) translate(-2.2%, -1.4%);
+  }
 }
 
 .wash {
@@ -374,5 +411,9 @@ body.is-idle {
   .topbar,
   .hud {
     transition: none;
+  }
+
+  .plate {
+    animation: none;
   }
 }

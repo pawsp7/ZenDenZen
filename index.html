@@ -6,19 +6,21 @@
     <meta name="theme-color" content="#7ec8ff" />
     <meta
       name="description"
-      content="ZenDenZen plays slow, bright ambient views of mountains, spa, garden, and meadow with relaxing spa audio."
+      content="ZenDenZen plays slow, realistic views of mountains, spa, garden, and meadow with relaxing spa audio."
     />
     <meta property="og:title" content="ZenDenZen" />
     <meta
       property="og:description"
-      content="Slow painted views. Bright color. Spa sound."
+      content="Slow realistic views. Bright color. Spa sound."
     />
     <meta property="og:type" content="website" />
-    <title>ZenDenZen — slow bright views & spa sound</title>
+    <title>ZenDenZen — slow realistic views & spa sound</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://assets.mixkit.co" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://images.pexels.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
@@ -27,8 +29,14 @@
   </head>
   <body>
     <div class="stage" aria-hidden="true">
-      <canvas id="viewA" class="film is-front"></canvas>
-      <canvas id="viewB" class="film"></canvas>
+      <div id="viewA" class="film is-front">
+        <img class="plate" alt="" />
+        <canvas class="atmosphere"></canvas>
+      </div>
+      <div id="viewB" class="film">
+        <img class="plate" alt="" />
+        <canvas class="atmosphere"></canvas>
+      </div>
       <div class="wash"></div>
       <div class="vignette"></div>
     </div>
@@ -38,7 +46,7 @@
         <p class="eyebrow">A quiet streaming den</p>
         <h1>ZenDenZen</h1>
         <p class="lede">
-          Slow, bright views of mountains, spa, garden, and meadow, with relaxing
+          Slow, realistic views of mountains, spa, garden, and meadow, with relaxing
           spa audio beside them.
         </p>
         <button id="enterBtn" class="enter" type="button">Enter the den</button>
@@ -101,7 +109,7 @@
     </section>
 
     <footer class="credits">
-      Slow painted views in the den. Spa audio by Eugenio Mininni &amp; Arulo via Mixkit.
+      Photographs from Unsplash and Pexels, drifting slowly. Spa audio by Eugenio Mininni &amp; Arulo via Mixkit.
     </footer>
 
     <script src="./audio.js"></script>

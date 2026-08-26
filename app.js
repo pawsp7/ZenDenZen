@@ -5,22 +5,22 @@ const SCENES = {
   },
   spa: {
     title: "Spa",
-    blurb: "Warm water, floating blossoms, gold light.",
+    blurb: "Warm water, still deck, gold afternoon light.",
   },
   garden: {
     title: "Garden",
-    blurb: "Sunny blooms, slow petals, a happy garden path.",
+    blurb: "Sunny blooms, a garden path, a clear blue sky.",
   },
   meadow: {
     title: "Meadow",
-    blurb: "Wildflowers, swaying grass, a wide blue sky.",
+    blurb: "Lavender rows, a wide sky, late-day color.",
   },
 };
 
-const canvasA = document.getElementById("viewA");
-const canvasB = document.getElementById("viewB");
-const viewA = new AmbientView(canvasA);
-const viewB = new AmbientView(canvasB);
+const rootA = document.getElementById("viewA");
+const rootB = document.getElementById("viewB");
+const viewA = new AmbientView(rootA);
+const viewB = new AmbientView(rootB);
 const gate = document.getElementById("gate");
 const enterBtn = document.getElementById("enterBtn");
 const playBtn = document.getElementById("playBtn");
@@ -35,13 +35,18 @@ const sceneButtons = [...document.querySelectorAll(".scene")];
 
 const sound = new SpaSoundscape();
 let activeScene = "mountains";
-let front = canvasA;
-let back = canvasB;
+let front = rootA;
+let back = rootB;
 let frontView = viewA;
 let backView = viewB;
 let playing = true;
 let idleTimer = 0;
 let entered = false;
+
+Object.values(PLATES).forEach((src) => {
+  const img = new Image();
+  img.src = src;
+});
 
 viewA.setScene("mountains");
 viewB.setScene("mountains");
@@ -65,7 +70,7 @@ function applyScene(name, { fade = true } = {}) {
   document.body.dataset.scene = name;
   document.body.style.setProperty(
     "--gold",
-    { mountains: "#f0c36a", spa: "#ffb38a", garden: "#7ed38a", meadow: "#ffe14a" }[name]
+    { mountains: "#f0c36a", spa: "#ffb38a", garden: "#7ed38a", meadow: "#d4a0ff" }[name]
   );
   sound.setScene(name);
 
@@ -82,11 +87,11 @@ function applyScene(name, { fade = true } = {}) {
   requestAnimationFrame(() => {
     back.classList.add("is-front");
     front.classList.remove("is-front");
-    const previousCanvas = front;
+    const previousRoot = front;
     const previousView = frontView;
     front = back;
     frontView = backView;
-    back = previousCanvas;
+    back = previousRoot;
     backView = previousView;
   });
   updateNowPlaying();
@@ -96,6 +101,7 @@ function setPlaying(next) {
   playing = next;
   frontView.setPlaying(playing);
   backView.setPlaying(playing);
+  document.body.classList.toggle("is-paused", !playing);
   if (playing) {
     if (entered) sound.resume();
     playBtn.setAttribute("aria-label", "Pause");
