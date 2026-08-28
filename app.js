@@ -1,22 +1,3 @@
-const SCENES = {
-  mountains: {
-    title: "Mountains",
-    blurb: "A sunny alpine valley, drifting cloud, living light.",
-  },
-  spa: {
-    title: "Spa",
-    blurb: "Warm pool light, slow ripples, a quiet afternoon.",
-  },
-  garden: {
-    title: "Garden",
-    blurb: "Blossoms over a garden path, sun on the grass.",
-  },
-  meadow: {
-    title: "Meadow",
-    blurb: "Lavender swaying in a quiet breeze.",
-  },
-};
-
 const rootA = document.getElementById("viewA");
 const rootB = document.getElementById("viewB");
 const viewA = new AmbientView(rootA);
@@ -31,10 +12,13 @@ const fullscreenBtn = document.getElementById("fullscreenBtn");
 const sceneTitle = document.getElementById("sceneTitle");
 const sceneBlurb = document.getElementById("sceneBlurb");
 const nowPlaying = document.getElementById("nowPlaying");
+const variantRow = document.getElementById("variantRow");
 const sceneButtons = [...document.querySelectorAll(".scene")];
 
 const sound = new SpaSoundscape();
 let activeScene = "mountains";
+let variantIndex = 0;
+const lastVariant = { mountains: 0, spa: 0, garden: 0, meadow: 0 };
 let front = rootA;
 let back = rootB;
 let frontView = viewA;
@@ -43,13 +27,24 @@ let playing = true;
 let idleTimer = 0;
 let entered = false;
 
-Object.values(CLIPS).forEach((clip) => {
-  const img = new Image();
-  img.src = clip.poster;
+try {
+  const saved = JSON.parse(localStorage.getItem("zdz-variants") || "{}");
+  Object.keys(lastVariant).forEach((key) => {
+    if (Number.isInteger(saved[key])) lastVariant[key] = saved[key];
+  });
+} catch (_err) {
+  /* ignore */
+}
+
+Object.values(SCENES).forEach((scene) => {
+  scene.options.forEach((option) => {
+    const img = new Image();
+    img.src = option.plate;
+  });
 });
 
-viewA.setScene("mountains");
-viewB.setScene("mountains");
+viewA.setScene("mountains", 0);
+viewB.setScene("mountains", 0);
 viewA.start();
 viewB.start();
 window.addEventListener("load", () => {
@@ -57,32 +52,66 @@ window.addEventListener("load", () => {
   viewB.resize();
 });
 
-function applyScene(name, { fade = true } = {}) {
+function saveVariants() {
+  try {
+    localStorage.setItem("zdz-variants", JSON.stringify(lastVariant));
+  } catch (_err) {
+    /* ignore */
+  }
+}
+
+function renderVariants() {
+  const options = SCENES[activeScene].options;
+  variantRow.replaceChildren(
+    ...options.map((option, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "variant" + (index === variantIndex ? " is-active" : "");
+      button.dataset.index = String(index);
+      button.setAttribute("role", "radio");
+      button.setAttribute("aria-checked", String(index === variantIndex));
+      button.textContent = option.name;
+      button.addEventListener("click", () => applyView(activeScene, index));
+      return button;
+    })
+  );
+}
+
+function applyView(name, nextIndex, { fade = true } = {}) {
+  const options = SCENES[name].options;
+  const index = ((nextIndex % options.length) + options.length) % options.length;
+  const option = options[index];
   activeScene = name;
-  const scene = SCENES[name];
-  sceneTitle.textContent = scene.title;
-  sceneBlurb.textContent = scene.blurb;
+  variantIndex = index;
+  lastVariant[name] = index;
+  saveVariants();
+
+  sceneTitle.textContent = SCENES[name].title;
+  sceneBlurb.textContent = option.blurb;
   sceneButtons.forEach((button) => {
     const selected = button.dataset.scene === name;
     button.classList.toggle("is-active", selected);
     button.setAttribute("aria-selected", String(selected));
   });
   document.body.dataset.scene = name;
-  document.body.style.setProperty(
-    "--gold",
-    { mountains: "#f0c36a", spa: "#ffb38a", garden: "#7ed38a", meadow: "#d4a0ff" }[name]
-  );
+  document.body.dataset.mood = option.mood;
+  document.body.style.setProperty("--gold", SCENES[name].accent);
   sound.setScene(name);
+  renderVariants();
 
-  if (!fade || frontView.scene === name) {
-    frontView.setScene(name);
+  const alreadyShowing =
+    frontView.scene === name &&
+    frontView.optionIndex === index &&
+    front.classList.contains("is-front");
+  if (!fade || alreadyShowing) {
+    frontView.setScene(name, index);
     front.classList.add("is-front");
     back.classList.remove("is-front");
     updateNowPlaying();
     return;
   }
 
-  backView.setScene(name);
+  backView.setScene(name, index);
   backView.setPlaying(playing);
   requestAnimationFrame(() => {
     back.classList.add("is-front");
@@ -144,7 +173,7 @@ enterBtn.addEventListener("click", enter);
 
 sceneButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    applyScene(button.dataset.scene);
+    applyView(button.dataset.scene, lastVariant[button.dataset.scene] ?? 0);
     if (entered && playing) sound.setMuted(false);
   });
 });
@@ -188,7 +217,14 @@ fullscreenBtn.addEventListener("click", async () => {
 document.addEventListener("keydown", (event) => {
   if (event.target.closest("input, textarea")) return;
   const sceneKeys = { 1: "mountains", 2: "spa", 3: "garden", 4: "meadow" };
-  if (sceneKeys[event.key]) applyScene(sceneKeys[event.key]);
+  if (sceneKeys[event.key]) applyView(sceneKeys[event.key], lastVariant[sceneKeys[event.key]] ?? 0);
+  const variantKeys = { q: 0, w: 1, e: 2 };
+  if (variantKeys[event.key.toLowerCase()] !== undefined) {
+    applyView(activeScene, variantKeys[event.key.toLowerCase()]);
+  }
+  if (event.key === "[" || event.key === "]") {
+    applyView(activeScene, variantIndex + (event.key === "]" ? 1 : -1));
+  }
   if (event.code === "Space") {
     event.preventDefault();
     playBtn.click();
@@ -201,5 +237,5 @@ document.addEventListener("keydown", (event) => {
   document.addEventListener(name, bumpIdle, { passive: true });
 });
 
-applyScene("mountains", { fade: false });
+applyView("mountains", lastVariant.mountains ?? 0, { fade: false });
 updateNowPlaying();

@@ -6,15 +6,15 @@
     <meta name="theme-color" content="#7ec8ff" />
     <meta
       name="description"
-      content="ZenDenZen plays slow photoreal films of mountains, spa, garden, and meadow with relaxing spa audio."
+      content="ZenDenZen holds still views of mountains, spa, garden, and meadow while the atmosphere keeps moving, with relaxing spa audio."
     />
     <meta property="og:title" content="ZenDenZen" />
     <meta
       property="og:description"
-      content="Slow photoreal films. Bright color. Spa sound."
+      content="Still views. Living weather. Spa sound."
     />
     <meta property="og:type" content="website" />
-    <title>ZenDenZen — slow photoreal films & spa sound</title>
+    <title>ZenDenZen — still views, living weather</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,13 +28,11 @@
   <body>
     <div class="stage" aria-hidden="true">
       <div id="viewA" class="film is-front">
-        <img class="still" alt="" />
-        <video class="plate" playsinline muted loop></video>
+        <img class="plate" alt="" />
         <canvas class="atmosphere"></canvas>
       </div>
       <div id="viewB" class="film">
-        <img class="still" alt="" />
-        <video class="plate" playsinline muted loop></video>
+        <img class="plate" alt="" />
         <canvas class="atmosphere"></canvas>
       </div>
       <div class="wash"></div>
@@ -46,8 +44,8 @@
         <p class="eyebrow">A quiet streaming den</p>
         <h1>ZenDenZen</h1>
         <p class="lede">
-          Slow photoreal films of mountains, spa, garden, and meadow, with relaxing
-          spa audio beside them.
+          Still views of mountains, spa, garden, and meadow. The camera stays put;
+          mist, steam, rain, and fireflies keep moving.
         </p>
         <button id="enterBtn" class="enter" type="button">Enter the den</button>
         <p class="hint">Click once to start picture and sound together.</p>
@@ -66,7 +64,7 @@
       <div class="scene-copy">
         <p id="sceneKicker" class="kicker">Now viewing</p>
         <h2 id="sceneTitle">Mountains</h2>
-        <p id="sceneBlurb">A sunny alpine valley, drifting cloud, living light.</p>
+        <p id="sceneBlurb">Dawn fog in the hollows, gold on the ridges.</p>
       </div>
 
       <div class="scene-row" role="tablist" aria-label="Ambient scenes">
@@ -87,6 +85,8 @@
           Meadow
         </button>
       </div>
+
+      <div id="variantRow" class="variant-row" role="radiogroup" aria-label="Atmosphere options"></div>
 
       <div class="transport">
         <button id="playBtn" class="icon-btn" type="button" aria-label="Pause">
@@ -109,7 +109,7 @@
     </section>
 
     <footer class="credits">
-      Photoreal films from Mixkit, played slowly. Spa audio by Eugenio Mininni &amp; Arulo.
+      Locked-camera plates with living weather. Spa audio by Eugenio Mininni &amp; Arulo.
     </footer>
 
     <script src="./audio.js"></script>
