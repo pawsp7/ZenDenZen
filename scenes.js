@@ -177,11 +177,11 @@ class AmbientView {
       v: 0.0018 + (i % 6) * 0.0007,
       drift: 0.008 + (i % 4) * 0.004,
     }));
-    this.fog = n(7, (_, i) => ({
-      x: (i * 0.19) % 1,
-      y: 0.38 + (i % 3) * 0.08,
-      w: 0.55 + (i % 4) * 0.12,
-      h: 0.08 + (i % 3) * 0.03,
+    this.fog = n(6, (_, i) => ({
+      x: (i * 0.23) % 1,
+      y: 0.32 + (i % 4) * 0.11,
+      w: 0.28 + (i % 3) * 0.08,
+      h: 0.05 + (i % 3) * 0.02,
       v: 0.004 + (i % 3) * 0.002,
     }));
     this.stars = n(90, (_, i) => ({
@@ -297,7 +297,7 @@ class AmbientView {
       const x = ((bank.x + t * bank.v) % 1.4) * w - w * 0.2;
       const y = h * (option.fogY + bank.y - 0.4) + Math.sin(t * 0.2 + i) * 10;
       const g = ctx.createRadialGradient(x, y, 10, x, y, w * bank.w * 0.5);
-      g.addColorStop(0, "rgba(255, 250, 245, 0.16)");
+      g.addColorStop(0, "rgba(255, 250, 245, 0.07)");
       g.addColorStop(1, "rgba(255, 250, 245, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
@@ -310,11 +310,11 @@ class AmbientView {
   drawLake(t) {
     const { ctx, w, h, option } = this;
     const y0 = h * option.waterY;
-    ctx.fillStyle = "rgba(180, 230, 255, 0.05)";
-    for (let i = 0; i < 8; i += 1) {
-      const y = y0 + i * 14 + Math.sin(t * 0.5 + i) * 3;
+    ctx.fillStyle = "rgba(180, 230, 255, 0.028)";
+    for (let i = 0; i < 5; i += 1) {
+      const y = y0 + i * 18 + Math.sin(t * 0.5 + i) * 3;
       ctx.beginPath();
-      ctx.ellipse(w * 0.5, y, w * 0.46, 9, 0, 0, Math.PI * 2);
+      ctx.ellipse(w * 0.52 + Math.sin(t * 0.2 + i) * 30, y, w * 0.28, 7, 0, 0, Math.PI * 2);
       ctx.fill();
     }
     const shadowX = ((t * 0.012) % 1.6) * w - w * 0.3;
@@ -441,7 +441,7 @@ class AmbientView {
       const x = ((bank.x + t * bank.v * 0.7) % 1.5) * w - w * 0.2;
       const y = h * option.fogY + Math.sin(t * 0.15 + i) * 8;
       const g = ctx.createRadialGradient(x, y, 8, x, y, w * 0.38);
-      g.addColorStop(0, "rgba(255, 245, 235, 0.14)");
+      g.addColorStop(0, "rgba(255, 245, 235, 0.06)");
       g.addColorStop(1, "rgba(255, 245, 235, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
@@ -455,11 +455,11 @@ class AmbientView {
     const { ctx, w, h } = this;
     ctx.fillStyle = `rgba(255, 220, 140, ${0.03 + Math.sin(t * 0.3) * 0.01})`;
     ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.03)";
-    for (let i = 0; i < 5; i += 1) {
-      const y = h * 0.35 + i * 18 + Math.sin(t * 0.6 + i) * 4;
+    ctx.fillStyle = "rgba(255, 255, 255, 0.018)";
+    for (let i = 0; i < 3; i += 1) {
+      const y = h * 0.58 + i * 22 + Math.sin(t * 0.6 + i) * 4;
       ctx.beginPath();
-      ctx.ellipse(w * 0.5, y, w * 0.5, 10, 0, 0, Math.PI * 2);
+      ctx.ellipse(w * 0.45 + i * 40, y, w * 0.22, 8, 0, 0, Math.PI * 2);
       ctx.fill();
     }
     this.drawMotes(t, 0.18, true);
@@ -517,10 +517,10 @@ class AmbientView {
     const { ctx, w, h } = this;
     const y0 = h * waterY;
     ctx.fillStyle = color;
-    for (let i = 0; i < 7; i += 1) {
-      const y = y0 + i * 12 + Math.sin(t * 0.45 + i) * 4;
+    for (let i = 0; i < 4; i += 1) {
+      const y = y0 + i * 16 + Math.sin(t * 0.45 + i) * 4;
       ctx.beginPath();
-      ctx.ellipse(w * 0.5, y, w * 0.48, 11, 0, 0, Math.PI * 2);
+      ctx.ellipse(w * 0.48 + Math.sin(t * 0.15 + i) * 40, y, w * 0.26, 8, 0, 0, Math.PI * 2);
       ctx.fill();
     }
   }
