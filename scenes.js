@@ -10,9 +10,9 @@ const SCENES = {
         plate: "./plates/mountains-mist.jpg",
         mood: "dawn",
         live: {
-          clouds: { y0: 0.02, y1: 0.34, speed: 9, alpha: 0.28 },
-          fog: { y0: 0.36, y1: 0.64, amp: 36, alpha: 0.42, speed: 0.18 },
-          sway: { y0: 0.68, y1: 1, amp: 3.2, freq: 0.02, speed: 1.15 },
+          clouds: { y0: 0.02, y1: 0.34, speed: 14, alpha: 0.38 },
+          fog: { y0: 0.36, y1: 0.64, amp: 48, alpha: 0.5, speed: 0.28 },
+          sway: { y0: 0.68, y1: 1, amp: 6, freq: 0.02, speed: 1.4 },
           rays: { x: 0.2, y: 0.4 },
           pollen: true,
         },
@@ -24,9 +24,9 @@ const SCENES = {
         plate: "./plates/mountains-lake.jpg",
         mood: "day",
         live: {
-          clouds: { y0: 0.0, y1: 0.3, speed: 8, alpha: 0.22 },
-          water: { y0: 0.48, y1: 1, amp: 7, freq: 0.042, speed: 1.8 },
-          sway: { y0: 0.28, y1: 0.52, amp: 2.2, freq: 0.016, speed: 0.9 },
+          clouds: { y0: 0.0, y1: 0.3, speed: 12, alpha: 0.32 },
+          water: { y0: 0.48, y1: 1, amp: 14, freq: 0.038, speed: 2.3 },
+          sway: { y0: 0.28, y1: 0.52, amp: 4.5, freq: 0.016, speed: 1.15 },
           sparkles: { y0: 0.5, y1: 0.92 },
           pollen: true,
         },
@@ -41,7 +41,7 @@ const SCENES = {
           stars: true,
           aurora: true,
           snow: true,
-          water: { y0: 0.62, y1: 1, amp: 3.5, freq: 0.05, speed: 1.1 },
+          water: { y0: 0.62, y1: 1, amp: 7, freq: 0.05, speed: 1.4 },
         },
       },
     ],
@@ -57,7 +57,7 @@ const SCENES = {
         plate: "./plates/spa-onsen.jpg",
         mood: "night",
         live: {
-          water: { y0: 0.52, y1: 0.86, amp: 5.5, freq: 0.06, speed: 1.7 },
+          water: { y0: 0.52, y1: 0.86, amp: 11, freq: 0.055, speed: 2.1 },
           steam: { x0: 0.28, x1: 0.92, y0: 0.42, y1: 0.86 },
           flicker: true,
           sparkles: { y0: 0.55, y1: 0.82 },
@@ -70,11 +70,11 @@ const SCENES = {
         plate: "./plates/spa-infinity.jpg",
         mood: "dusk",
         live: {
-          water: { y0: 0.42, y1: 0.86, amp: 6.5, freq: 0.048, speed: 1.9 },
+          water: { y0: 0.42, y1: 0.86, amp: 13, freq: 0.042, speed: 2.4 },
           steam: { x0: 0.1, x1: 0.9, y0: 0.4, y1: 0.78 },
           rays: { x: 0.72, y: 0.42 },
           sparkles: { y0: 0.46, y1: 0.84 },
-          sway: { y0: 0.2, y1: 0.55, amp: 2.4, freq: 0.018, speed: 0.85 },
+          sway: { y0: 0.2, y1: 0.55, amp: 5, freq: 0.018, speed: 1.1 },
         },
       },
       {
@@ -85,7 +85,7 @@ const SCENES = {
         mood: "dusk",
         live: {
           rain: true,
-          water: { y0: 0.68, y1: 1, amp: 4, freq: 0.07, speed: 1.5 },
+          water: { y0: 0.68, y1: 1, amp: 8, freq: 0.07, speed: 1.8 },
           flicker: true,
         },
       },
@@ -102,8 +102,8 @@ const SCENES = {
         plate: "./plates/garden-rose.jpg",
         mood: "day",
         live: {
-          clouds: { y0: 0.0, y1: 0.22, speed: 7, alpha: 0.18 },
-          sway: { y0: 0.12, y1: 1, amp: 4.2, freq: 0.015, speed: 1.05 },
+          clouds: { y0: 0.0, y1: 0.22, speed: 10, alpha: 0.26 },
+          sway: { y0: 0.12, y1: 1, amp: 8, freq: 0.014, speed: 1.25 },
           petals: "blush",
           pollen: true,
           rays: { x: 0.78, y: 0.18 },
@@ -116,8 +116,8 @@ const SCENES = {
         plate: "./plates/garden-zen.jpg",
         mood: "day",
         live: {
-          water: { y0: 0.58, y1: 0.92, amp: 5.5, freq: 0.055, speed: 1.5 },
-          sway: { y0: 0.08, y1: 0.7, amp: 3.4, freq: 0.014, speed: 0.95 },
+          water: { y0: 0.58, y1: 0.92, amp: 11, freq: 0.05, speed: 1.9 },
+          sway: { y0: 0.08, y1: 0.7, amp: 6.5, freq: 0.014, speed: 1.15 },
           petals: "maple",
           sparkles: { y0: 0.6, y1: 0.88 },
         },
@@ -129,7 +129,7 @@ const SCENES = {
         plate: "./plates/garden-lantern.jpg",
         mood: "dusk",
         live: {
-          sway: { y0: 0.15, y1: 1, amp: 3, freq: 0.016, speed: 0.9 },
+          sway: { y0: 0.15, y1: 1, amp: 6, freq: 0.016, speed: 1.1 },
           fireflies: 0.7,
           flicker: true,
           pollen: true,
@@ -148,9 +148,9 @@ const SCENES = {
         plate: "./plates/meadow-dawn.jpg",
         mood: "dawn",
         live: {
-          clouds: { y0: 0.0, y1: 0.36, speed: 8, alpha: 0.24 },
-          fog: { y0: 0.4, y1: 0.72, amp: 40, alpha: 0.38, speed: 0.16 },
-          sway: { y0: 0.42, y1: 1, amp: 5, freq: 0.017, speed: 1.2 },
+          clouds: { y0: 0.0, y1: 0.36, speed: 12, alpha: 0.34 },
+          fog: { y0: 0.4, y1: 0.72, amp: 52, alpha: 0.48, speed: 0.22 },
+          sway: { y0: 0.42, y1: 1, amp: 10, freq: 0.016, speed: 1.45 },
           pollen: true,
         },
       },
@@ -161,8 +161,8 @@ const SCENES = {
         plate: "./plates/meadow-lavender.jpg",
         mood: "day",
         live: {
-          clouds: { y0: 0.0, y1: 0.38, speed: 10, alpha: 0.26 },
-          sway: { y0: 0.34, y1: 1, amp: 6.5, freq: 0.013, speed: 1.25 },
+          clouds: { y0: 0.0, y1: 0.38, speed: 14, alpha: 0.36 },
+          sway: { y0: 0.34, y1: 1, amp: 13, freq: 0.012, speed: 1.5 },
           pollen: true,
         },
       },
@@ -173,8 +173,8 @@ const SCENES = {
         plate: "./plates/meadow-fireflies.jpg",
         mood: "night",
         live: {
-          fog: { y0: 0.42, y1: 0.68, amp: 30, alpha: 0.28, speed: 0.12 },
-          sway: { y0: 0.4, y1: 1, amp: 4.5, freq: 0.018, speed: 1.05 },
+          fog: { y0: 0.42, y1: 0.68, amp: 40, alpha: 0.36, speed: 0.18 },
+          sway: { y0: 0.4, y1: 1, amp: 9, freq: 0.017, speed: 1.25 },
           fireflies: 1,
         },
       },
@@ -410,6 +410,7 @@ class AmbientView {
     const y0 = Math.floor(h * spec.y0);
     const y1 = Math.floor(h * spec.y1);
     const step = 2;
+    const pad = spec.amp * 2 + 4;
     for (let y = y0; y < y1; y += step) {
       const fade = (y - y0) / Math.max(1, y1 - y0);
       const wave =
@@ -421,9 +422,9 @@ class AmbientView {
         y * dpr,
         source.width,
         Math.max(1, step * dpr),
-        wave * (0.35 + fade * 0.65),
+        wave * (0.35 + fade * 0.65) - pad,
         y,
-        w,
+        w + pad * 2,
         step
       );
     }
@@ -435,14 +436,16 @@ class AmbientView {
     const y1 = Math.floor(h * spec.y1);
     const hh = y1 - y0;
     if (hh <= 0) return;
-    const step = 4;
-    for (let x = 0; x < w; x += step) {
+    const step = 3;
+    const pad = spec.amp * 2 + 6;
+    for (let x = -pad; x < w + pad; x += step) {
       const gust =
         Math.sin(x * spec.freq + t * spec.speed) * spec.amp +
         Math.sin(x * spec.freq * 0.35 + t * spec.speed * 0.55) * spec.amp * 0.45;
+      const srcX = Math.max(0, Math.min(w - step, x));
       ctx.drawImage(
         source,
-        x * dpr,
+        srcX * dpr,
         y0 * dpr,
         Math.max(1, step * dpr),
         hh * dpr,
