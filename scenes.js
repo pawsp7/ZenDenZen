@@ -421,20 +421,17 @@ class AmbientView {
   }
 
   liveSway(t, spec) {
+    this.liveWater(t, spec);
     const { ctx, source } = this;
     const W = source.width;
     const H = source.height;
     const y0 = Math.floor(spec.y0 * H);
-    const y1 = Math.floor(spec.y1 * H);
-    const amp = spec.amp * this.dpr;
-    const pad = amp * 2 + 8;
-    for (let y = y0; y < y1; y += 2) {
-      const fade = (y - y0) / Math.max(1, y1 - y0);
-      const wave =
-        Math.sin(y * (spec.freq / this.dpr) + t * spec.speed) * amp * (0.25 + fade * 0.85) +
-        Math.sin(y * 0.01 + t * spec.speed * 0.6) * amp * 0.25;
-      ctx.drawImage(source, 0, y, W, 2, wave - pad, y, W + pad * 2, 2);
-    }
+    const hh = Math.max(1, Math.floor(spec.y1 * H) - y0);
+    const drift = Math.sin(t * spec.speed * 0.45) * spec.amp * this.dpr;
+    ctx.save();
+    ctx.globalAlpha = 0.3;
+    ctx.drawImage(source, 0, y0, W, hh, drift, y0, W, hh);
+    ctx.restore();
   }
 
   liveRays(t, sun) {
