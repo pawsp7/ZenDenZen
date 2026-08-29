@@ -394,7 +394,6 @@ class AmbientView {
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     if (this.reduced) return;
 
-    eachSpec(live.sway, (spec) => this.liveBreeze(t, spec));
     eachSpec(live.water, (spec) => {
       this.liveCaustics(t, spec);
       this.liveFoam(t, spec);
@@ -418,15 +417,17 @@ class AmbientView {
     const H = source.height;
     const y = spec.y0 * H;
     const hh = Math.max(1, (spec.y1 - spec.y0) * H);
-    const shift = (t * spec.speed * this.dpr) % W;
+    const amp = Math.max(36, spec.speed) * this.dpr;
+    const shift = Math.sin(t * 0.16) * amp + Math.sin(t * 0.07) * amp * 0.4;
+    const extra = Math.abs(shift) + 12;
     ctx.save();
-    ctx.globalAlpha = spec.alpha;
-    ctx.drawImage(source, 0, y, W, hh, shift, y, W, hh);
-    ctx.drawImage(source, 0, y, W, hh, shift - W, y, W, hh);
-    ctx.globalAlpha = spec.alpha * 0.55;
-    const shift2 = (t * spec.speed * 0.45 * this.dpr) % W;
-    ctx.drawImage(source, 0, y, W, hh, -shift2, y + Math.sin(t * 0.2) * 6, W, hh);
-    ctx.drawImage(source, 0, y, W, hh, -shift2 + W, y + Math.sin(t * 0.2) * 6, W, hh);
+    ctx.beginPath();
+    ctx.rect(0, y, W, hh);
+    ctx.clip();
+    ctx.globalAlpha = spec.alpha * 0.8;
+    ctx.drawImage(source, 0, y, W, hh, shift - extra, y, W + extra * 2, hh);
+    ctx.globalAlpha = spec.alpha * 0.38;
+    ctx.drawImage(source, 0, y, W, hh, -shift * 0.45 - extra, y + Math.sin(t * 0.22) * 8, W + extra * 2, hh);
     ctx.restore();
   }
 
@@ -438,9 +439,13 @@ class AmbientView {
     const hh = Math.max(1, (spec.y1 - spec.y0) * H);
     const amp = spec.amp * this.dpr;
     const shift = Math.sin(t * spec.speed) * amp + Math.sin(t * spec.speed * 0.37) * amp * 0.4;
+    const extra = Math.abs(shift) + 16;
     ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, y, W, hh);
+    ctx.clip();
     ctx.globalAlpha = spec.alpha;
-    ctx.drawImage(source, 0, y, W, hh, shift, y, W, hh);
+    ctx.drawImage(source, 0, y, W, hh, shift - extra, y, W + extra * 2, hh);
     ctx.globalAlpha = spec.alpha * 0.5;
     ctx.drawImage(
       source,
@@ -448,9 +453,9 @@ class AmbientView {
       y,
       W,
       hh,
-      -shift * 0.65,
+      -shift * 0.65 - extra,
       y + Math.sin(t * spec.speed * 1.3) * 12,
-      W,
+      W + extra * 2,
       hh
     );
     ctx.restore();
@@ -550,29 +555,6 @@ class AmbientView {
       ctx.moveTo(x, y);
       ctx.lineTo(x + 2 * this.dpr, y + 22 * this.dpr);
       ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  liveBreeze(t, spec) {
-    const { ctx, w, h } = this;
-    const y0 = spec.y0 * h;
-    const hh = (spec.y1 - spec.y0) * h;
-    const x0 = (spec.x0 ?? 0) * w;
-    const ww = ((spec.x1 ?? 1) - (spec.x0 ?? 0)) * w;
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(x0, y0, ww, hh);
-    ctx.clip();
-    ctx.globalCompositeOperation = "soft-light";
-    for (let i = 0; i < 3; i += 1) {
-      const x = x0 + ((((t * 0.14 + i * 0.33) % 1.35) - 0.18) * ww);
-      const g = ctx.createLinearGradient(x, 0, x + ww * 0.22, 0);
-      g.addColorStop(0, "rgba(255,255,255,0)");
-      g.addColorStop(0.5, "rgba(255,255,255,0.48)");
-      g.addColorStop(1, "rgba(255,255,255,0)");
-      ctx.fillStyle = g;
-      ctx.fillRect(x0, y0, ww, hh);
     }
     ctx.restore();
   }
