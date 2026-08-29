@@ -425,17 +425,15 @@ class AmbientView {
     const W = source.width;
     const H = source.height;
     const y0 = Math.floor(spec.y0 * H);
-    const hh = Math.floor(spec.y1 * H) - y0;
-    if (hh <= 0) return;
+    const y1 = Math.floor(spec.y1 * H);
     const amp = spec.amp * this.dpr;
-    const pad = Math.ceil(amp * 2 + 8);
-    const step = 3;
-    for (let x = -pad; x < W + pad; x += step) {
-      const gust =
-        Math.sin(x * (spec.freq / this.dpr) + t * spec.speed) * amp +
-        Math.sin(x * (spec.freq / this.dpr) * 0.35 + t * spec.speed * 0.55) * amp * 0.45;
-      const srcX = Math.max(0, Math.min(W - step, x));
-      ctx.drawImage(source, srcX, y0, step, hh, x + gust, y0, step, hh);
+    const pad = amp * 2 + 8;
+    for (let y = y0; y < y1; y += 2) {
+      const fade = (y - y0) / Math.max(1, y1 - y0);
+      const wave =
+        Math.sin(y * (spec.freq / this.dpr) + t * spec.speed) * amp * (0.25 + fade * 0.85) +
+        Math.sin(y * 0.01 + t * spec.speed * 0.6) * amp * 0.25;
+      ctx.drawImage(source, 0, y, W, 2, wave - pad, y, W + pad * 2, 2);
     }
   }
 
