@@ -301,7 +301,7 @@ class AmbientView {
       g.addColorStop(1, "rgba(255, 250, 245, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.ellipse(x, y, w * bank.w * 0.5, h * bank.h, 0, 0, Math.PI * 2);
+      ctx.ellipse(x, y, w * bank.w * 0.42, h * bank.h, 0, 0, Math.PI * 2);
       ctx.fill();
     });
     this.drawMotes(t, 0.14);
