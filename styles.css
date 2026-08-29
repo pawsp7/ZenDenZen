@@ -81,6 +81,15 @@ body {
 
 .atmosphere {
   pointer-events: none;
+  opacity: 0;
+}
+
+.film.is-live .atmosphere {
+  opacity: 1;
+}
+
+.film.is-live .plate {
+  opacity: 0;
 }
 
 body[data-mood="night"] {

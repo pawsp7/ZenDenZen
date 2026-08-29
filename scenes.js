@@ -8,27 +8,41 @@ const SCENES = {
         name: "Valley mist",
         blurb: "Dawn fog in the hollows, gold on the ridges.",
         plate: "./plates/mountains-mist.jpg",
-        weather: "mist",
         mood: "dawn",
-        sun: [0.2, 0.4],
-        fogY: 0.46,
+        live: {
+          clouds: { y0: 0.02, y1: 0.34, speed: 9, alpha: 0.28 },
+          fog: { y0: 0.36, y1: 0.64, amp: 36, alpha: 0.42, speed: 0.18 },
+          sway: { y0: 0.68, y1: 1, amp: 3.2, freq: 0.02, speed: 1.15 },
+          rays: { x: 0.2, y: 0.4 },
+          pollen: true,
+        },
       },
       {
         id: "lake",
         name: "Mirror lake",
         blurb: "Still glacial water, bright peaks, a high quiet day.",
         plate: "./plates/mountains-lake.jpg",
-        weather: "lake",
         mood: "day",
-        waterY: 0.52,
+        live: {
+          clouds: { y0: 0.0, y1: 0.3, speed: 8, alpha: 0.22 },
+          water: { y0: 0.48, y1: 1, amp: 7, freq: 0.042, speed: 1.8 },
+          sway: { y0: 0.28, y1: 0.52, amp: 2.2, freq: 0.016, speed: 0.9 },
+          sparkles: { y0: 0.5, y1: 0.92 },
+          pollen: true,
+        },
       },
       {
         id: "night",
         name: "Star field",
         blurb: "Snow peaks, aurora hush, a high winter night.",
         plate: "./plates/mountains-night.jpg",
-        weather: "night",
         mood: "night",
+        live: {
+          stars: true,
+          aurora: true,
+          snow: true,
+          water: { y0: 0.62, y1: 1, amp: 3.5, freq: 0.05, speed: 1.1 },
+        },
       },
     ],
   },
@@ -41,28 +55,39 @@ const SCENES = {
         name: "Stone bath",
         blurb: "Cedar, mineral steam, lantern light on wet stone.",
         plate: "./plates/spa-onsen.jpg",
-        weather: "steam",
         mood: "night",
-        waterY: 0.58,
+        live: {
+          water: { y0: 0.52, y1: 0.86, amp: 5.5, freq: 0.06, speed: 1.7 },
+          steam: { x0: 0.28, x1: 0.92, y0: 0.42, y1: 0.86 },
+          flicker: true,
+          sparkles: { y0: 0.55, y1: 0.82 },
+        },
       },
       {
         id: "infinity",
         name: "Infinity light",
         blurb: "Warm pool, mountain haze, late-day gold.",
         plate: "./plates/spa-infinity.jpg",
-        weather: "caustics",
         mood: "dusk",
-        waterY: 0.48,
-        sun: [0.72, 0.42],
+        live: {
+          water: { y0: 0.42, y1: 0.86, amp: 6.5, freq: 0.048, speed: 1.9 },
+          steam: { x0: 0.1, x1: 0.9, y0: 0.4, y1: 0.78 },
+          rays: { x: 0.72, y: 0.42 },
+          sparkles: { y0: 0.46, y1: 0.84 },
+          sway: { y0: 0.2, y1: 0.55, amp: 2.4, freq: 0.018, speed: 0.85 },
+        },
       },
       {
         id: "rain",
         name: "Rain glass",
         blurb: "Warm stone inside, rain on the garden glass.",
         plate: "./plates/spa-rain.jpg",
-        weather: "rain",
         mood: "dusk",
-        waterY: 0.62,
+        live: {
+          rain: true,
+          water: { y0: 0.68, y1: 1, amp: 4, freq: 0.07, speed: 1.5 },
+          flicker: true,
+        },
       },
     ],
   },
@@ -75,25 +100,40 @@ const SCENES = {
         name: "Rose walk",
         blurb: "Morning dew, pollen, a walled path of blooms.",
         plate: "./plates/garden-rose.jpg",
-        weather: "pollen",
         mood: "day",
+        live: {
+          clouds: { y0: 0.0, y1: 0.22, speed: 7, alpha: 0.18 },
+          sway: { y0: 0.12, y1: 1, amp: 4.2, freq: 0.015, speed: 1.05 },
+          petals: "blush",
+          pollen: true,
+          rays: { x: 0.78, y: 0.18 },
+        },
       },
       {
         id: "zen",
         name: "Maple pond",
         blurb: "Koi water, falling leaves, a still Japanese garden.",
         plate: "./plates/garden-zen.jpg",
-        weather: "petals",
         mood: "day",
-        waterY: 0.62,
+        live: {
+          water: { y0: 0.58, y1: 0.92, amp: 5.5, freq: 0.055, speed: 1.5 },
+          sway: { y0: 0.08, y1: 0.7, amp: 3.4, freq: 0.014, speed: 0.95 },
+          petals: "maple",
+          sparkles: { y0: 0.6, y1: 0.88 },
+        },
       },
       {
         id: "lantern",
         name: "Lantern hour",
         blurb: "Dusk path, hanging gold, first fireflies.",
         plate: "./plates/garden-lantern.jpg",
-        weather: "lantern",
         mood: "dusk",
+        live: {
+          sway: { y0: 0.15, y1: 1, amp: 3, freq: 0.016, speed: 0.9 },
+          fireflies: 0.7,
+          flicker: true,
+          pollen: true,
+        },
       },
     ],
   },
@@ -106,26 +146,37 @@ const SCENES = {
         name: "Dawn fog",
         blurb: "Wildflowers, river mist, a pale peach sky.",
         plate: "./plates/meadow-dawn.jpg",
-        weather: "groundfog",
         mood: "dawn",
-        fogY: 0.55,
+        live: {
+          clouds: { y0: 0.0, y1: 0.36, speed: 8, alpha: 0.24 },
+          fog: { y0: 0.4, y1: 0.72, amp: 40, alpha: 0.38, speed: 0.16 },
+          sway: { y0: 0.42, y1: 1, amp: 5, freq: 0.017, speed: 1.2 },
+          pollen: true,
+        },
       },
       {
         id: "lavender",
         name: "Lavender noon",
         blurb: "Purple rows, summer heat, a slow wide sky.",
         plate: "./plates/meadow-lavender.jpg",
-        weather: "heat",
         mood: "day",
+        live: {
+          clouds: { y0: 0.0, y1: 0.38, speed: 10, alpha: 0.26 },
+          sway: { y0: 0.34, y1: 1, amp: 6.5, freq: 0.013, speed: 1.25 },
+          pollen: true,
+        },
       },
       {
         id: "fireflies",
         name: "Firefly dusk",
         blurb: "Tall grass, warm sparks, a blue-hour meadow.",
         plate: "./plates/meadow-fireflies.jpg",
-        weather: "fireflies",
         mood: "night",
-        fogY: 0.5,
+        live: {
+          fog: { y0: 0.42, y1: 0.68, amp: 30, alpha: 0.28, speed: 0.12 },
+          sway: { y0: 0.4, y1: 1, amp: 4.5, freq: 0.018, speed: 1.05 },
+          fireflies: 1,
+        },
       },
     ],
   },
@@ -141,97 +192,120 @@ class AmbientView {
     this.root = root;
     this.plate = root.querySelector(".plate");
     this.canvas = root.querySelector(".atmosphere");
-    this.ctx = this.canvas.getContext("2d", { alpha: true });
+    this.ctx = this.canvas.getContext("2d", { alpha: false });
+    this.source = document.createElement("canvas");
+    this.sctx = this.source.getContext("2d", { alpha: false });
+    this.image = new Image();
+    this.image.onload = () => this.blitSource();
     this.scene = "mountains";
     this.optionIndex = 0;
     this.option = optionOf("mountains", 0);
     this.running = true;
-    this.speed = 0.22;
     this.elapsed = 0;
     this.last = performance.now();
     this.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (this.reduced) this.speed = 0.04;
     this.raf = 0;
+    this.ready = false;
     this.prime();
     this.resize();
     window.addEventListener("resize", () => this.resize());
   }
 
   resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = this.root.clientWidth || window.innerWidth;
     const h = this.root.clientHeight || window.innerHeight;
-    this.canvas.width = Math.round(w * dpr);
-    this.canvas.height = Math.round(h * dpr);
-    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
     this.w = w;
     this.h = h;
+    this.canvas.width = Math.round(w * this.dpr);
+    this.canvas.height = Math.round(h * this.dpr);
+    this.source.width = this.canvas.width;
+    this.source.height = this.canvas.height;
+    this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    this.sctx.setTransform(1, 0, 0, 1, 0, 0);
+    this.blitSource();
+  }
+
+  coverDraw(ctx, img, w, h) {
+    const iw = img.naturalWidth;
+    const ih = img.naturalHeight;
+    if (!iw || !ih) return;
+    const scale = Math.max(w / iw, h / ih);
+    const dw = iw * scale;
+    const dh = ih * scale;
+    ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+  }
+
+  blitSource() {
+    if (!this.image.naturalWidth || !this.w) {
+      this.ready = false;
+      this.root.classList.remove("is-live");
+      return;
+    }
+    this.sctx.fillStyle = "#8fd6ff";
+    this.sctx.fillRect(0, 0, this.source.width, this.source.height);
+    this.coverDraw(this.sctx, this.image, this.source.width, this.source.height);
+    this.ready = true;
+    this.root.classList.add("is-live");
   }
 
   prime() {
     const n = (count, make) => Array.from({ length: count }, make);
-    this.motes = n(36, (_, i) => ({
+    this.motes = n(70, (_, i) => ({
       x: (i * 0.137 + 0.04) % 1,
       y: (i * 0.211 + 0.07) % 1,
-      r: 0.5 + (i % 5) * 0.28,
-      v: 0.0018 + (i % 6) * 0.0007,
-      drift: 0.008 + (i % 4) * 0.004,
+      r: 1.1 + (i % 5) * 0.55,
+      v: 0.012 + (i % 6) * 0.004,
+      drift: 0.04 + (i % 4) * 0.02,
     }));
-    this.fog = n(6, (_, i) => ({
-      x: (i * 0.23) % 1,
-      y: 0.32 + (i % 4) * 0.11,
-      w: 0.28 + (i % 3) * 0.08,
-      h: 0.05 + (i % 3) * 0.02,
-      v: 0.004 + (i % 3) * 0.002,
-    }));
-    this.stars = n(90, (_, i) => ({
+    this.stars = n(110, (_, i) => ({
       x: (i * 0.061 + 0.02) % 1,
-      y: ((i * 0.037) % 0.55),
-      r: 0.4 + (i % 5) * 0.25,
-      tw: 0.4 + (i % 7) * 0.18,
+      y: (i * 0.037) % 0.52,
+      r: 0.6 + (i % 5) * 0.35,
+      tw: 0.7 + (i % 7) * 0.25,
     }));
-    this.snow = n(48, (_, i) => ({
+    this.snow = n(90, (_, i) => ({
       x: (i * 0.083) % 1,
       y: (i * 0.17) % 1,
-      r: 0.7 + (i % 4) * 0.4,
-      v: 0.012 + (i % 5) * 0.004,
-      w: 0.008 + (i % 3) * 0.004,
+      r: 1.1 + (i % 4) * 0.7,
+      v: 0.045 + (i % 5) * 0.02,
+      w: 0.02 + (i % 3) * 0.012,
     }));
-    this.steam = n(40, (_, i) => ({
-      x: 0.35 + (i % 10) * 0.04 + (i * 0.01) % 0.2,
-      y: 0.55 + (i % 8) * 0.04,
-      r: 8 + (i % 6) * 5,
-      v: 0.018 + (i % 5) * 0.006,
-      wobble: 0.012 + (i % 4) * 0.006,
+    this.steam = n(55, (_, i) => ({
+      x: (i * 0.073) % 1,
+      y: (i * 0.11) % 1,
+      r: 16 + (i % 6) * 10,
+      v: 0.055 + (i % 5) * 0.02,
+      wobble: 0.03 + (i % 4) * 0.015,
     }));
-    this.rain = n(110, (_, i) => ({
+    this.rain = n(160, (_, i) => ({
       x: (i * 0.047) % 1,
       y: (i * 0.13) % 1,
-      len: 12 + (i % 8) * 4,
-      v: 0.55 + (i % 6) * 0.08,
+      len: 16 + (i % 8) * 6,
+      v: 1.15 + (i % 6) * 0.18,
     }));
-    this.beads = n(18, (_, i) => ({
-      x: 0.08 + (i % 9) * 0.1,
-      y: 0.08 + Math.floor(i / 9) * 0.18 + (i % 5) * 0.03,
-      r: 1.4 + (i % 4) * 0.6,
+    this.beads = n(22, (_, i) => ({
+      x: 0.06 + (i % 11) * 0.085,
+      y: 0.06 + Math.floor(i / 11) * 0.2 + (i % 5) * 0.03,
+      r: 1.8 + (i % 4) * 0.7,
     }));
-    this.fireflies = n(26, (_, i) => ({
+    this.fireflies = n(42, (_, i) => ({
       x: (i * 0.157) % 1,
-      y: 0.35 + (i * 0.09) % 0.55,
-      r: 1.2 + (i % 3) * 0.5,
-      v: 0.008 + (i % 4) * 0.003,
-      pulse: 0.6 + (i % 5) * 0.25,
+      y: 0.28 + (i * 0.09) % 0.62,
+      r: 1.6 + (i % 3) * 0.7,
+      v: 0.22 + (i % 4) * 0.08,
+      pulse: 1.1 + (i % 5) * 0.35,
     }));
-    this.petals = n(16, (_, i) => ({
+    this.petals = n(28, (_, i) => ({
       x: (i * 0.19) % 1,
       y: (i * 0.27) % 1,
-      s: 4 + (i % 4) * 2,
-      v: 0.016 + (i % 4) * 0.006,
-      spin: 0.4 + (i % 5) * 0.2,
+      s: 5.5 + (i % 4) * 2.4,
+      v: 0.055 + (i % 4) * 0.02,
+      spin: 0.7 + (i % 5) * 0.25,
     }));
-    this.sparkles = n(22, (_, i) => ({
+    this.sparkles = n(36, (_, i) => ({
       x: (i * 0.11) % 1,
-      y: 0.5 + (i * 0.07) % 0.4,
+      y: (i * 0.07) % 1,
       life: (i * 0.17) % 1,
     }));
   }
@@ -240,8 +314,15 @@ class AmbientView {
     this.scene = name;
     this.optionIndex = optionIndex;
     this.option = optionOf(name, optionIndex);
-    if (this.plate.getAttribute("src") !== this.option.plate) {
-      this.plate.src = this.option.plate;
+    const src = this.option.plate;
+    if (this.plate.getAttribute("src") !== src) this.plate.src = src;
+    if (this.loadedSrc !== src) {
+      this.loadedSrc = src;
+      this.ready = false;
+      this.root.classList.remove("is-live");
+      this.image.src = src;
+    } else {
+      this.blitSource();
     }
   }
 
@@ -253,9 +334,9 @@ class AmbientView {
 
   start() {
     const loop = (now) => {
-      if (this.running) this.elapsed += (now - this.last) * this.speed;
+      if (this.running) this.elapsed += (now - this.last) * 0.001;
       this.last = now;
-      this.draw(this.elapsed / 1000);
+      this.draw(this.elapsed);
       this.raf = requestAnimationFrame(loop);
     };
     this.raf = requestAnimationFrame(loop);
@@ -264,235 +345,274 @@ class AmbientView {
   draw(t) {
     const { ctx, w, h, option } = this;
     if (!w || !h || !option) return;
-    ctx.clearRect(0, 0, w, h);
-    const weather = option.weather;
-    if (weather === "mist") this.drawMist(t);
-    else if (weather === "lake") this.drawLake(t);
-    else if (weather === "night") this.drawNight(t);
-    else if (weather === "steam") this.drawSteam(t);
-    else if (weather === "caustics") this.drawCaustics(t);
-    else if (weather === "rain") this.drawRain(t);
-    else if (weather === "pollen") this.drawPollen(t);
-    else if (weather === "petals") this.drawPetals(t);
-    else if (weather === "lantern") this.drawLantern(t);
-    else if (weather === "groundfog") this.drawGroundFog(t);
-    else if (weather === "heat") this.drawHeat(t);
-    else if (weather === "fireflies") this.drawFireflies(t);
+    if (!this.ready) {
+      ctx.clearRect(0, 0, w, h);
+      return;
+    }
+
+    ctx.drawImage(this.source, 0, 0, w, h);
+    if (this.reduced) return;
+
+    const live = option.live || {};
+    if (live.clouds) this.liveClouds(t, live.clouds);
+    if (live.fog) this.liveFog(t, live.fog);
+    if (live.water) this.liveWater(t, live.water);
+    if (live.sway) this.liveSway(t, live.sway);
+    if (live.rays) this.liveRays(t, live.rays);
+    if (live.sparkles) this.liveSparkles(t, live.sparkles);
+    if (live.steam) this.liveSteam(t, live.steam);
+    if (live.rain) this.liveRain(t);
+    if (live.snow) this.liveSnow(t);
+    if (live.stars) this.liveStars(t);
+    if (live.aurora) this.liveAurora(t);
+    if (live.petals) this.livePetals(t, live.petals);
+    if (live.pollen) this.livePollen(t);
+    if (live.fireflies) this.liveFireflies(t, live.fireflies);
+    if (live.flicker) this.liveFlicker(t);
   }
 
-  drawMist(t) {
-    const { ctx, w, h, option } = this;
-    const [sx, sy] = option.sun;
+  srcBand(y, hh) {
+    const dpr = this.dpr;
+    return [0, y * dpr, this.source.width, Math.max(1, hh * dpr)];
+  }
+
+  liveClouds(t, spec) {
+    const { ctx, w, h, source } = this;
+    const y = h * spec.y0;
+    const hh = Math.max(1, h * (spec.y1 - spec.y0));
+    const shift = (t * spec.speed) % w;
+    const [sx, sy, sw, sh] = this.srcBand(y, hh);
+    ctx.save();
+    ctx.globalAlpha = spec.alpha;
+    ctx.drawImage(source, sx, sy, sw, sh, shift, y, w, hh);
+    ctx.drawImage(source, sx, sy, sw, sh, shift - w, y, w, hh);
+    ctx.restore();
+  }
+
+  liveFog(t, spec) {
+    const { ctx, w, h, source } = this;
+    const y = h * spec.y0;
+    const hh = Math.max(1, h * (spec.y1 - spec.y0));
+    const shift = Math.sin(t * spec.speed) * spec.amp + Math.sin(t * spec.speed * 0.37) * spec.amp * 0.35;
+    const [sx, sy, sw, sh] = this.srcBand(y, hh);
+    ctx.save();
+    ctx.globalAlpha = spec.alpha;
+    ctx.drawImage(source, sx, sy, sw, sh, shift, y, w, hh);
+    ctx.restore();
+    ctx.save();
+    ctx.globalAlpha = spec.alpha * 0.45;
+    ctx.drawImage(source, sx, sy, sw, sh, -shift * 0.6, y + Math.sin(t * 0.4) * 6, w, hh);
+    ctx.restore();
+  }
+
+  liveWater(t, spec) {
+    const { ctx, w, h, source, dpr } = this;
+    const y0 = Math.floor(h * spec.y0);
+    const y1 = Math.floor(h * spec.y1);
+    const step = 2;
+    for (let y = y0; y < y1; y += step) {
+      const fade = (y - y0) / Math.max(1, y1 - y0);
+      const wave =
+        Math.sin(y * spec.freq + t * spec.speed) * spec.amp +
+        Math.sin(y * spec.freq * 2.3 + t * spec.speed * 1.6) * spec.amp * 0.35;
+      ctx.drawImage(
+        source,
+        0,
+        y * dpr,
+        source.width,
+        Math.max(1, step * dpr),
+        wave * (0.35 + fade * 0.65),
+        y,
+        w,
+        step
+      );
+    }
+  }
+
+  liveSway(t, spec) {
+    const { ctx, w, h, source, dpr } = this;
+    const y0 = Math.floor(h * spec.y0);
+    const y1 = Math.floor(h * spec.y1);
+    const hh = y1 - y0;
+    if (hh <= 0) return;
+    const step = 4;
+    for (let x = 0; x < w; x += step) {
+      const gust =
+        Math.sin(x * spec.freq + t * spec.speed) * spec.amp +
+        Math.sin(x * spec.freq * 0.35 + t * spec.speed * 0.55) * spec.amp * 0.45;
+      ctx.drawImage(
+        source,
+        x * dpr,
+        y0 * dpr,
+        Math.max(1, step * dpr),
+        hh * dpr,
+        x + gust,
+        y0,
+        step,
+        hh
+      );
+    }
+  }
+
+  liveRays(t, sun) {
+    const { ctx, w, h } = this;
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
-    const glow = 0.07 + Math.sin(t * 0.35) * 0.02;
-    const grad = ctx.createRadialGradient(w * sx, h * sy, 8, w * sx, h * sy, w * 0.42);
-    grad.addColorStop(0, `rgba(255, 228, 180, ${glow + 0.08})`);
-    grad.addColorStop(1, "rgba(255, 200, 140, 0)");
-    ctx.fillStyle = grad;
+    const pulse = 0.12 + Math.sin(t * 0.7) * 0.04;
+    const g = ctx.createRadialGradient(w * sun.x, h * sun.y, 6, w * sun.x, h * sun.y, w * 0.38);
+    g.addColorStop(0, `rgba(255, 228, 170, ${pulse})`);
+    g.addColorStop(1, "rgba(255, 200, 120, 0)");
+    ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
-    ctx.restore();
-
-    this.fog.forEach((bank, i) => {
-      const x = ((bank.x + t * bank.v) % 1.4) * w - w * 0.2;
-      const y = h * (option.fogY + bank.y - 0.4) + Math.sin(t * 0.2 + i) * 10;
-      const g = ctx.createRadialGradient(x, y, 10, x, y, w * bank.w * 0.5);
-      g.addColorStop(0, "rgba(255, 250, 245, 0.07)");
-      g.addColorStop(1, "rgba(255, 250, 245, 0)");
-      ctx.fillStyle = g;
+    ctx.translate(w * sun.x, h * sun.y);
+    ctx.rotate(-0.35 + Math.sin(t * 0.15) * 0.04);
+    ctx.fillStyle = `rgba(255, 220, 160, ${0.035 + Math.sin(t * 0.5) * 0.012})`;
+    for (let i = 0; i < 7; i += 1) {
+      ctx.rotate(0.22);
       ctx.beginPath();
-      ctx.ellipse(x, y, w * bank.w * 0.42, h * bank.h, 0, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    this.drawMotes(t, 0.14);
-  }
-
-  drawLake(t) {
-    const { ctx, w, h, option } = this;
-    const y0 = h * option.waterY;
-    ctx.fillStyle = "rgba(180, 230, 255, 0.028)";
-    for (let i = 0; i < 5; i += 1) {
-      const y = y0 + i * 18 + Math.sin(t * 0.5 + i) * 3;
-      ctx.beginPath();
-      ctx.ellipse(w * 0.52 + Math.sin(t * 0.2 + i) * 30, y, w * 0.28, 7, 0, 0, Math.PI * 2);
+      ctx.moveTo(0, 0);
+      ctx.lineTo(w * 0.55, -14);
+      ctx.lineTo(w * 0.55, 14);
       ctx.fill();
     }
-    const shadowX = ((t * 0.012) % 1.6) * w - w * 0.3;
-    const sg = ctx.createRadialGradient(shadowX, h * 0.28, 20, shadowX, h * 0.28, w * 0.34);
-    sg.addColorStop(0, "rgba(20, 40, 70, 0.08)");
-    sg.addColorStop(1, "rgba(20, 40, 70, 0)");
-    ctx.fillStyle = sg;
-    ctx.fillRect(0, 0, w, h * 0.55);
-    this.drawSparkles(t, option.waterY, 0.9);
-    this.drawMotes(t, 0.1);
+    ctx.restore();
   }
 
-  drawNight(t) {
+  liveSparkles(t, spec) {
     const { ctx, w, h } = this;
-    this.stars.forEach((star, i) => {
-      const a = 0.25 + Math.sin(t * star.tw + i) * 0.22;
-      ctx.fillStyle = `rgba(230, 240, 255, ${a})`;
+    this.sparkles.forEach((s, i) => {
+      const phase = (s.life + t * 0.55) % 1;
+      if (phase > 0.28) return;
+      const a = Math.sin(phase * Math.PI) * 0.85;
+      const x = ((s.x + t * 0.015) % 1) * w;
+      const y = h * spec.y0 + ((s.y + i * 0.017) % 1) * h * (spec.y1 - spec.y0);
+      ctx.fillStyle = `rgba(255,255,255,${a})`;
       ctx.beginPath();
-      ctx.arc(star.x * w, star.y * h, star.r, 0, Math.PI * 2);
+      ctx.arc(x, y, 1.6, 0, Math.PI * 2);
       ctx.fill();
     });
-    const aurora = 0.06 + Math.sin(t * 0.18) * 0.03;
-    const ag = ctx.createLinearGradient(0, h * 0.18, w, h * 0.42);
-    ag.addColorStop(0, `rgba(80, 220, 170, ${aurora})`);
-    ag.addColorStop(0.5, `rgba(160, 120, 255, ${aurora * 0.7})`);
-    ag.addColorStop(1, "rgba(80, 220, 170, 0)");
-    ctx.fillStyle = ag;
-    ctx.fillRect(0, 0, w, h * 0.5);
+  }
+
+  liveSteam(t, spec) {
+    const { ctx, w, h } = this;
+    this.steam.forEach((puff, i) => {
+      const localY = ((puff.y - t * puff.v) % 1 + 1) % 1;
+      const x = spec.x0 + ((puff.x + Math.sin(t * 0.7 + i) * puff.wobble) % 1) * (spec.x1 - spec.x0);
+      const y = spec.y0 + localY * (spec.y1 - spec.y0);
+      const fade = Math.max(0, 1 - localY);
+      const g = ctx.createRadialGradient(x * w, y * h, 2, x * w, y * h, puff.r);
+      g.addColorStop(0, `rgba(255, 236, 214, ${0.22 * fade})`);
+      g.addColorStop(1, "rgba(255, 220, 190, 0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(x * w, y * h, puff.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  liveRain(t) {
+    const { ctx, w, h } = this;
+    ctx.strokeStyle = "rgba(210, 230, 245, 0.42)";
+    ctx.lineWidth = 1.3;
+    this.rain.forEach((drop) => {
+      const x = ((drop.x + t * 0.08) % 1) * w;
+      const y = ((drop.y + t * drop.v) % 1) * h;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + 4, y + drop.len);
+      ctx.stroke();
+    });
+    this.beads.forEach((bead, i) => {
+      const y = bead.y * h + (t * 8 + Math.sin(t * 0.4 + i) * 6) % (h * 0.35);
+      ctx.fillStyle = "rgba(200, 230, 255, 0.4)";
+      ctx.beginPath();
+      ctx.ellipse(bead.x * w, y, bead.r * 0.7, bead.r, 0, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  liveSnow(t) {
+    const { ctx, w, h } = this;
     this.snow.forEach((flake, i) => {
       const x = ((flake.x + t * flake.w) % 1) * w;
       const y = ((flake.y + t * flake.v) % 1) * h;
-      ctx.fillStyle = `rgba(255,255,255,${0.28 + Math.sin(t + i) * 0.12})`;
+      ctx.fillStyle = `rgba(255,255,255,${0.45 + Math.sin(t + i) * 0.2})`;
       ctx.beginPath();
       ctx.arc(x, y, flake.r, 0, Math.PI * 2);
       ctx.fill();
     });
   }
 
-  drawSteam(t) {
-    const { ctx, w, h, option } = this;
-    this.steam.forEach((puff, i) => {
-      const y = ((puff.y - t * puff.v) % 1 + 1) % 1;
-      const x = puff.x + Math.sin(t * 0.4 + i) * puff.wobble;
-      const fade = Math.max(0, 1 - y * 1.1);
-      const g = ctx.createRadialGradient(x * w, y * h, 2, x * w, y * h, puff.r);
-      g.addColorStop(0, `rgba(255, 230, 200, ${0.1 * fade})`);
-      g.addColorStop(1, "rgba(255, 220, 180, 0)");
-      ctx.fillStyle = g;
+  liveStars(t) {
+    const { ctx, w, h } = this;
+    this.stars.forEach((star, i) => {
+      const a = 0.2 + Math.sin(t * star.tw + i) * 0.35;
+      ctx.fillStyle = `rgba(230, 240, 255, ${Math.max(0.08, a)})`;
       ctx.beginPath();
-      ctx.arc(x * w, y * h, puff.r, 0, Math.PI * 2);
+      ctx.arc(star.x * w, star.y * h, star.r, 0, Math.PI * 2);
       ctx.fill();
     });
-    this.drawWaterBands(t, option.waterY, "rgba(255, 200, 140, 0.05)");
-    const flicker = 0.04 + Math.sin(t * 7.3) * 0.015 + Math.sin(t * 13.1) * 0.01;
-    ctx.fillStyle = `rgba(255, 170, 80, ${flicker})`;
-    ctx.fillRect(0, 0, w, h);
   }
 
-  drawCaustics(t) {
-    const { ctx, w, h, option } = this;
-    this.drawWaterBands(t, option.waterY, "rgba(120, 230, 255, 0.06)");
-    this.drawSparkles(t, option.waterY, 0.85);
-    if (option.sun) {
-      const [sx, sy] = option.sun;
-      const g = ctx.createRadialGradient(w * sx, h * sy, 4, w * sx, h * sy, w * 0.3);
-      g.addColorStop(0, `rgba(255, 210, 140, ${0.08 + Math.sin(t * 0.4) * 0.02})`);
-      g.addColorStop(1, "rgba(255, 180, 80, 0)");
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, w, h);
-    }
-    this.drawMotes(t, 0.12);
+  liveAurora(t) {
+    const { ctx, w, h } = this;
+    const a = 0.1 + Math.sin(t * 0.35) * 0.045;
+    const g = ctx.createLinearGradient(0, h * 0.12, w, h * 0.46);
+    g.addColorStop(0, `rgba(70, 230, 170, ${a})`);
+    g.addColorStop(0.45, `rgba(150, 110, 255, ${a * 0.8})`);
+    g.addColorStop(1, "rgba(70, 230, 170, 0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h * 0.5);
   }
 
-  drawRain(t) {
-    const { ctx, w, h, option } = this;
-    ctx.strokeStyle = "rgba(210, 230, 245, 0.22)";
-    ctx.lineWidth = 1;
-    this.rain.forEach((drop) => {
-      const x = ((drop.x + t * 0.04) % 1) * w;
-      const y = ((drop.y + t * drop.v) % 1) * h;
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(x + 3, y + drop.len);
-      ctx.stroke();
-    });
-    this.beads.forEach((bead, i) => {
-      const y = bead.y * h + Math.sin(t * 0.15 + i) * 2;
-      ctx.fillStyle = "rgba(200, 230, 255, 0.28)";
-      ctx.beginPath();
-      ctx.ellipse(bead.x * w, y, bead.r * 0.7, bead.r, 0, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    this.drawWaterBands(t, option.waterY, "rgba(180, 220, 230, 0.05)");
-  }
-
-  drawPollen(t) {
-    this.drawMotes(t, 0.2, true);
+  livePetals(t, kind) {
+    const { ctx, w, h } = this;
     this.petals.forEach((petal, i) => {
-      this.drawPetal(petal, t, i, "rgba(255, 210, 180, 0.35)");
-    });
-  }
-
-  drawPetals(t) {
-    const { option } = this;
-    this.petals.forEach((petal, i) => {
-      this.drawPetal(petal, t, i, i % 2 ? "rgba(210, 70, 50, 0.38)" : "rgba(230, 120, 40, 0.32)");
-    });
-    this.drawWaterBands(t, option.waterY, "rgba(80, 140, 110, 0.06)");
-    this.drawMotes(t, 0.1);
-  }
-
-  drawLantern(t) {
-    const { ctx, w, h } = this;
-    const pulse = 0.05 + Math.sin(t * 0.9) * 0.015;
-    ctx.fillStyle = `rgba(255, 170, 70, ${pulse})`;
-    ctx.fillRect(0, 0, w, h);
-    this.drawFireflyField(t, 0.55);
-    this.drawMotes(t, 0.08);
-  }
-
-  drawGroundFog(t) {
-    const { ctx, w, h, option } = this;
-    this.fog.forEach((bank, i) => {
-      const x = ((bank.x + t * bank.v * 0.7) % 1.5) * w - w * 0.2;
-      const y = h * option.fogY + Math.sin(t * 0.15 + i) * 8;
-      const g = ctx.createRadialGradient(x, y, 8, x, y, w * 0.38);
-      g.addColorStop(0, "rgba(255, 245, 235, 0.06)");
-      g.addColorStop(1, "rgba(255, 245, 235, 0)");
-      ctx.fillStyle = g;
+      const x = ((petal.x + Math.sin(t * 0.5 + i) * 0.12) % 1) * w;
+      const y = ((petal.y + t * petal.v) % 1) * h;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(t * petal.spin + i);
+      ctx.fillStyle =
+        kind === "maple"
+          ? i % 2
+            ? "rgba(210, 70, 40, 0.72)"
+            : "rgba(230, 120, 40, 0.68)"
+          : "rgba(255, 210, 190, 0.7)";
       ctx.beginPath();
-      ctx.ellipse(x, y, w * 0.38, h * 0.08, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, petal.s, petal.s * 0.42, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+  }
+
+  livePollen(t) {
+    const { ctx, w, h } = this;
+    this.motes.forEach((m, i) => {
+      const x = ((m.x + t * m.v) % 1) * w;
+      const y = ((m.y + Math.sin(t * m.drift + i) * 0.05 + t * 0.012 + 1) % 1) * h;
+      ctx.fillStyle = `rgba(255,255,230,${0.28 + Math.sin(t * 2 + i) * 0.12})`;
+      ctx.beginPath();
+      ctx.arc(x, y, m.r, 0, Math.PI * 2);
       ctx.fill();
     });
-    this.drawMotes(t, 0.16, true);
   }
 
-  drawHeat(t) {
+  liveFireflies(t, scale) {
     const { ctx, w, h } = this;
-    ctx.fillStyle = `rgba(255, 220, 140, ${0.03 + Math.sin(t * 0.3) * 0.01})`;
-    ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.018)";
-    for (let i = 0; i < 3; i += 1) {
-      const y = h * 0.58 + i * 22 + Math.sin(t * 0.6 + i) * 4;
-      ctx.beginPath();
-      ctx.ellipse(w * 0.45 + i * 40, y, w * 0.22, 8, 0, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    this.drawMotes(t, 0.18, true);
-  }
-
-  drawFireflies(t) {
-    const { ctx, w, h, option } = this;
-    this.fog.forEach((bank, i) => {
-      const x = ((bank.x + t * 0.003) % 1.4) * w - w * 0.2;
-      const y = h * option.fogY + Math.sin(t * 0.12 + i) * 6;
-      const g = ctx.createRadialGradient(x, y, 4, x, y, w * 0.3);
-      g.addColorStop(0, "rgba(255, 250, 230, 0.08)");
-      g.addColorStop(1, "rgba(255, 250, 230, 0)");
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.ellipse(x, y, w * 0.3, h * 0.07, 0, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    this.drawFireflyField(t, 0.85);
-  }
-
-  drawFireflyField(t, scale) {
-    const { ctx, w, h } = this;
+    const span = typeof scale === "number" ? scale : 1;
     this.fireflies.forEach((bug, i) => {
-      const x = ((bug.x + Math.sin(t * bug.v + i) * 0.04) % 1) * w;
-      const y = ((bug.y + Math.cos(t * bug.v * 0.8 + i) * 0.03) % 1) * h * scale + h * (1 - scale) * 0.15;
-      const a = 0.15 + Math.max(0, Math.sin(t * bug.pulse + i)) * 0.7;
-      const g = ctx.createRadialGradient(x, y, 0, x, y, bug.r * 7);
-      g.addColorStop(0, `rgba(255, 230, 120, ${a})`);
+      const x = ((bug.x + Math.sin(t * bug.v + i) * 0.08) % 1) * w;
+      const y =
+        ((bug.y + Math.cos(t * bug.v * 0.7 + i) * 0.05) % 1) * h * span +
+        h * (1 - span) * 0.12;
+      const a = 0.2 + Math.max(0, Math.sin(t * bug.pulse + i)) * 0.85;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, bug.r * 10);
+      g.addColorStop(0, `rgba(255, 230, 110, ${a})`);
       g.addColorStop(1, "rgba(255, 200, 60, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(x, y, bug.r * 7, 0, Math.PI * 2);
+      ctx.arc(x, y, bug.r * 10, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = `rgba(255, 250, 180, ${a})`;
       ctx.beginPath();
@@ -501,55 +621,11 @@ class AmbientView {
     });
   }
 
-  drawMotes(t, alpha, pollen = false) {
+  liveFlicker(t) {
     const { ctx, w, h } = this;
-    this.motes.forEach((m, i) => {
-      const x = ((m.x + t * m.v) % 1) * w;
-      const y = ((m.y + Math.sin(t * m.drift + i) * 0.03 + (pollen ? t * 0.004 : 0) + 1) % 1) * h;
-      ctx.fillStyle = `rgba(255,255,255,${alpha + Math.sin(t + i) * 0.06})`;
-      ctx.beginPath();
-      ctx.arc(x, y, m.r, 0, Math.PI * 2);
-      ctx.fill();
-    });
-  }
-
-  drawWaterBands(t, waterY, color) {
-    const { ctx, w, h } = this;
-    const y0 = h * waterY;
-    ctx.fillStyle = color;
-    for (let i = 0; i < 4; i += 1) {
-      const y = y0 + i * 16 + Math.sin(t * 0.45 + i) * 4;
-      ctx.beginPath();
-      ctx.ellipse(w * 0.48 + Math.sin(t * 0.15 + i) * 40, y, w * 0.26, 8, 0, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  drawSparkles(t, waterY, span) {
-    const { ctx, w, h } = this;
-    this.sparkles.forEach((s, i) => {
-      const phase = (s.life + t * 0.15) % 1;
-      if (phase > 0.35) return;
-      const a = Math.sin(phase * Math.PI) * 0.55;
-      ctx.fillStyle = `rgba(255, 255, 255, ${a})`;
-      ctx.beginPath();
-      ctx.arc(((s.x + t * 0.01) % 1) * w, h * waterY + s.y * h * 0.2 * span, 1.3, 0, Math.PI * 2);
-      ctx.fill();
-    });
-  }
-
-  drawPetal(petal, t, i, color) {
-    const { ctx, w, h } = this;
-    const x = ((petal.x + Math.sin(t * 0.3 + i) * 0.08) % 1) * w;
-    const y = ((petal.y + t * petal.v) % 1) * h;
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(t * petal.spin + i);
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, petal.s, petal.s * 0.45, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
+    const a = 0.035 + Math.sin(t * 9.4) * 0.02 + Math.sin(t * 17.2) * 0.012;
+    ctx.fillStyle = `rgba(255, 170, 70, ${Math.max(0, a)})`;
+    ctx.fillRect(0, 0, w, h);
   }
 }
 
