@@ -343,21 +343,21 @@ class AmbientView {
   }
 
   draw(t) {
-    const { ctx, w, h, option } = this;
-    if (!w || !h || !option) return;
-    if (!this.ready) {
-      ctx.clearRect(0, 0, w, h);
-      return;
-    }
+    const { ctx, option } = this;
+    if (!this.w || !this.h || !option || !this.ready) return;
 
-    ctx.drawImage(this.source, 0, 0, w, h);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(this.source, 0, 0);
+    const live = option.live || {};
+    if (!this.reduced) {
+      if (live.clouds) this.liveClouds(t, live.clouds);
+      if (live.fog) this.liveFog(t, live.fog);
+      if (live.water) this.liveWater(t, live.water);
+      if (live.sway) this.liveSway(t, live.sway);
+    }
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     if (this.reduced) return;
 
-    const live = option.live || {};
-    if (live.clouds) this.liveClouds(t, live.clouds);
-    if (live.fog) this.liveFog(t, live.fog);
-    if (live.water) this.liveWater(t, live.water);
-    if (live.sway) this.liveSway(t, live.sway);
     if (live.rays) this.liveRays(t, live.rays);
     if (live.sparkles) this.liveSparkles(t, live.sparkles);
     if (live.steam) this.liveSteam(t, live.steam);
@@ -371,89 +371,71 @@ class AmbientView {
     if (live.flicker) this.liveFlicker(t);
   }
 
-  srcBand(y, hh) {
-    const dpr = this.dpr;
-    return [0, y * dpr, this.source.width, Math.max(1, hh * dpr)];
-  }
-
   liveClouds(t, spec) {
-    const { ctx, w, h, source } = this;
-    const y = h * spec.y0;
-    const hh = Math.max(1, h * (spec.y1 - spec.y0));
-    const shift = (t * spec.speed) % w;
-    const [sx, sy, sw, sh] = this.srcBand(y, hh);
+    const { ctx, source } = this;
+    const W = source.width;
+    const H = source.height;
+    const y = spec.y0 * H;
+    const hh = Math.max(1, (spec.y1 - spec.y0) * H);
+    const shift = (t * spec.speed * this.dpr) % W;
     ctx.save();
     ctx.globalAlpha = spec.alpha;
-    ctx.drawImage(source, sx, sy, sw, sh, shift, y, w, hh);
-    ctx.drawImage(source, sx, sy, sw, sh, shift - w, y, w, hh);
+    ctx.drawImage(source, 0, y, W, hh, shift, y, W, hh);
+    ctx.drawImage(source, 0, y, W, hh, shift - W, y, W, hh);
     ctx.restore();
   }
 
   liveFog(t, spec) {
-    const { ctx, w, h, source } = this;
-    const y = h * spec.y0;
-    const hh = Math.max(1, h * (spec.y1 - spec.y0));
-    const shift = Math.sin(t * spec.speed) * spec.amp + Math.sin(t * spec.speed * 0.37) * spec.amp * 0.35;
-    const [sx, sy, sw, sh] = this.srcBand(y, hh);
+    const { ctx, source } = this;
+    const W = source.width;
+    const H = source.height;
+    const y = spec.y0 * H;
+    const hh = Math.max(1, (spec.y1 - spec.y0) * H);
+    const amp = spec.amp * this.dpr;
+    const shift = Math.sin(t * spec.speed) * amp + Math.sin(t * spec.speed * 0.37) * amp * 0.35;
     ctx.save();
     ctx.globalAlpha = spec.alpha;
-    ctx.drawImage(source, sx, sy, sw, sh, shift, y, w, hh);
+    ctx.drawImage(source, 0, y, W, hh, shift, y, W, hh);
     ctx.restore();
     ctx.save();
     ctx.globalAlpha = spec.alpha * 0.45;
-    ctx.drawImage(source, sx, sy, sw, sh, -shift * 0.6, y + Math.sin(t * 0.4) * 6, w, hh);
+    ctx.drawImage(source, 0, y, W, hh, -shift * 0.6, y + Math.sin(t * 0.4) * 8, W, hh);
     ctx.restore();
   }
 
   liveWater(t, spec) {
-    const { ctx, w, h, source, dpr } = this;
-    const y0 = Math.floor(h * spec.y0);
-    const y1 = Math.floor(h * spec.y1);
-    const step = 2;
-    const pad = spec.amp * 2 + 4;
-    for (let y = y0; y < y1; y += step) {
+    const { ctx, source } = this;
+    const W = source.width;
+    const H = source.height;
+    const y0 = Math.floor(spec.y0 * H);
+    const y1 = Math.floor(spec.y1 * H);
+    const amp = spec.amp * this.dpr;
+    const pad = amp * 2 + 8;
+    for (let y = y0; y < y1; y += 2) {
       const fade = (y - y0) / Math.max(1, y1 - y0);
       const wave =
-        Math.sin(y * spec.freq + t * spec.speed) * spec.amp +
-        Math.sin(y * spec.freq * 2.3 + t * spec.speed * 1.6) * spec.amp * 0.35;
-      ctx.drawImage(
-        source,
-        0,
-        y * dpr,
-        source.width,
-        Math.max(1, step * dpr),
-        wave * (0.35 + fade * 0.65) - pad,
-        y,
-        w + pad * 2,
-        step
-      );
+        Math.sin(y * (spec.freq / this.dpr) + t * spec.speed) * amp +
+        Math.sin(y * (spec.freq / this.dpr) * 2.3 + t * spec.speed * 1.6) * amp * 0.35;
+      ctx.drawImage(source, 0, y, W, 2, wave * (0.35 + fade * 0.65) - pad, y, W + pad * 2, 2);
     }
   }
 
   liveSway(t, spec) {
-    const { ctx, w, h, source, dpr } = this;
-    const y0 = Math.floor(h * spec.y0);
-    const y1 = Math.floor(h * spec.y1);
-    const hh = y1 - y0;
+    const { ctx, source } = this;
+    const W = source.width;
+    const H = source.height;
+    const y0 = Math.floor(spec.y0 * H);
+    const hh = Math.floor(spec.y1 * H) - y0;
     if (hh <= 0) return;
+    const amp = spec.amp * this.dpr;
+    const pad = Math.ceil(amp * 2 + 8);
     const step = 3;
-    const pad = spec.amp * 2 + 6;
-    for (let x = -pad; x < w + pad; x += step) {
+    for (let x = -pad; x < W + pad; x += step) {
       const gust =
-        Math.sin(x * spec.freq + t * spec.speed) * spec.amp +
-        Math.sin(x * spec.freq * 0.35 + t * spec.speed * 0.55) * spec.amp * 0.45;
-      const srcX = Math.max(0, Math.min(w - step, x));
-      ctx.drawImage(
-        source,
-        srcX * dpr,
-        y0 * dpr,
-        Math.max(1, step * dpr),
-        hh * dpr,
-        x + gust,
-        y0,
-        step,
-        hh
-      );
+        Math.sin(x * (spec.freq / this.dpr) + t * spec.speed) * amp +
+        Math.sin(x * (spec.freq / this.dpr) * 0.35 + t * spec.speed * 0.55) * amp * 0.45;
+      const srcX = Math.max(0, Math.min(W - step, x));
+      ctx.drawImage(source, srcX, y0, step, hh, x + gust, y0, step, hh);
     }
   }
 
