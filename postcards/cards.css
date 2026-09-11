@@ -1,15 +1,12 @@
-/* Printable zen postcard faces — 10.7cm × 13.8cm */
+/* Postcard backs — 10.7cm × 13.8cm, ink on white construction paper */
 :root {
   --card-w: 107mm;
   --card-h: 138mm;
   --ink: #2a2620;
-  --muted: rgba(42, 38, 32, 0.55);
-  --gold: #c4a574;
-  --sage: #8a9a78;
-  --line: rgba(42, 38, 32, 0.22);
-  --paper-still: #f3eee4;
-  --paper-breathe: #e7ebe3;
-  --paper-balance: #e6d7be;
+  --muted: rgba(42, 38, 32, 0.52);
+  --gold: #b08d55;
+  --sage: #7d8c6c;
+  --line: rgba(42, 38, 32, 0.2);
 }
 
 .sprite {
@@ -20,144 +17,85 @@
 }
 
 .card {
+  box-sizing: border-box;
   position: relative;
   width: var(--card-w);
   height: var(--card-h);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 8mm 8mm 7mm;
   color: var(--ink);
-  background: var(--paper-still);
+  background: #fff;
   font-family: Outfit, system-ui, sans-serif;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
 
-.card img.art {
+.frame {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.card .frame {
-  position: absolute;
-  inset: 6mm;
-  border: 0.18mm solid rgba(42, 38, 32, 0.2);
+  inset: 4.5mm;
+  border: 0.18mm solid rgba(42, 38, 32, 0.22);
   pointer-events: none;
 }
 
-.theme-breathe .frame {
-  border-color: rgba(244, 239, 230, 0.34);
-}
-
-.theme-balance .frame {
-  border-color: rgba(42, 38, 32, 0.16);
-}
-
-.card .word {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 9mm;
-  margin: 0;
+.head {
   text-align: center;
+  margin: 1.5mm 0 4.5mm;
+}
+
+.head svg {
+  display: block;
+  width: 11mm;
+  height: 11mm;
+  margin: 0 auto 2.4mm;
+}
+
+.event {
+  margin: 0;
+  font-size: 6pt;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prompt {
+  margin: 2mm 0 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
   font-style: italic;
-  font-size: 12.5pt;
-  letter-spacing: 0.46em;
-  text-indent: 0.46em;
-  line-height: 1;
-}
-
-.theme-stillness .word {
-  color: #2a2620;
-}
-
-.theme-breathe .word {
-  color: #f6f3ec;
-  text-shadow: 0 1px 10px rgba(42, 38, 32, 0.28);
-}
-
-.theme-balance .word {
-  bottom: auto;
-  top: 10mm;
-  color: #3a342c;
-}
-
-/* —— backs —— */
-.card.back {
-  box-sizing: border-box;
-  padding: 9mm 8.5mm 8mm;
-  display: flex;
-  flex-direction: column;
-}
-
-.theme-stillness.back {
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.35), transparent 55%),
-    var(--paper-still);
-}
-
-.theme-breathe.back {
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.28), transparent 55%),
-    var(--paper-breathe);
-}
-
-.theme-balance.back {
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.22), transparent 55%),
-    var(--paper-balance);
-}
-
-.back-head {
-  display: flex;
-  align-items: center;
-  gap: 3.2mm;
-  margin-bottom: 6mm;
-}
-
-.back-head svg {
-  width: 9mm;
-  height: 9mm;
-  flex: none;
-}
-
-.back-head .name {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-style: italic;
-  font-size: 13pt;
-  letter-spacing: 0.22em;
-}
-
-.back-kicker {
-  margin: 0 0 1mm;
-  font-size: 6.2pt;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-size: 13.5pt;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
 }
 
 .split {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 0.18mm 1fr;
-  gap: 5.5mm;
+  grid-template-columns: 1.35fr 0.16mm 0.9fr;
+  gap: 4.8mm;
   min-height: 0;
 }
 
 .rule {
   background: var(--line);
-  width: 0.18mm;
+  width: 0.16mm;
   justify-self: center;
 }
 
+.salute {
+  margin: 0 0 3.2mm;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 10.5pt;
+  color: var(--ink);
+}
+
 .label {
-  margin: 0 0 3.5mm;
-  font-size: 6.4pt;
-  letter-spacing: 0.32em;
+  margin: 0 0 3.2mm;
+  font-size: 6pt;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -165,13 +103,13 @@
 .lines {
   display: flex;
   flex-direction: column;
-  gap: 7.2mm;
+  gap: 6.5mm;
 }
 
 .lines span {
   display: block;
   height: 0;
-  border-bottom: 0.18mm solid var(--line);
+  border-bottom: 0.16mm solid var(--line);
 }
 
 .address {
@@ -180,39 +118,57 @@
 }
 
 .stamp {
-  width: 18mm;
-  height: 22mm;
-  margin: 0 0 7mm auto;
-  border: 0.22mm dashed rgba(42, 38, 32, 0.32);
+  box-sizing: border-box;
+  width: 16mm;
+  height: 20mm;
+  margin: 0 0 0 auto;
+  border: 0.2mm dashed rgba(42, 38, 32, 0.32);
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 2.2mm;
-  font-size: 5.6pt;
-  letter-spacing: 0.28em;
+  padding-bottom: 2mm;
+  font-size: 5.2pt;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: rgba(42, 38, 32, 0.38);
 }
 
-.address .lines {
+.address .label {
   margin-top: auto;
-  gap: 8mm;
 }
 
-.back-foot {
+.address .lines {
+  gap: 7.2mm;
+}
+
+.foot {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-top: 6mm;
-  font-size: 6.4pt;
-  letter-spacing: 0.18em;
+  gap: 4mm;
+  margin-top: 5mm;
+  font-size: 6.2pt;
+  letter-spacing: 0.12em;
   color: var(--muted);
 }
 
-.back-foot .brand {
+.foot .date {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2mm;
+}
+
+.foot .blank {
+  display: inline-block;
+  width: 22mm;
+  border-bottom: 0.16mm solid var(--line);
+  transform: translateY(-0.6mm);
+}
+
+.wish {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
-  letter-spacing: 0.12em;
-  font-size: 9pt;
+  letter-spacing: 0.04em;
+  font-size: 8.5pt;
   color: var(--ink);
 }

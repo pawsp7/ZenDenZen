@@ -1,7 +1,7 @@
 html,
 body {
   margin: 0;
-  background: #f6f1e8;
+  background: #e8e2d8;
   color: #2a2620;
   font-family: Outfit, system-ui, sans-serif;
 }
@@ -24,7 +24,7 @@ body {
 
 .eyebrow {
   margin: 0;
-  color: #c4a574;
+  color: #b08d55;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   font-size: 0.72rem;
@@ -33,13 +33,13 @@ body {
 h1 {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
   line-height: 0.95;
   margin: 8px 0 12px;
 }
 
 .lede {
-  max-width: 38em;
+  max-width: 40em;
   line-height: 1.55;
   color: rgba(42, 38, 32, 0.72);
   font-weight: 300;
@@ -75,35 +75,35 @@ h1 {
 }
 
 .gallery {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 24px 48px;
-  display: grid;
-  gap: 48px;
+  padding: 20px 24px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px 28px;
 }
 
-.pair h2 {
+.gallery section {
+  max-width: var(--card-w);
+}
+
+.gallery h2 {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
   font-style: italic;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   margin: 0 0 4px;
 }
 
-.pair > p {
-  margin: 0 0 18px;
+.gallery section > p {
+  margin: 0 0 14px;
   color: rgba(42, 38, 32, 0.62);
   font-weight: 300;
-}
-
-.faces {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
+  line-height: 1.4;
 }
 
 .gallery .card {
-  box-shadow: 0 18px 40px rgba(42, 38, 32, 0.12);
+  box-shadow: 0 16px 36px rgba(42, 38, 32, 0.12);
 }
 
 .how {
@@ -125,10 +125,8 @@ h1 {
   font-weight: 300;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 720px) {
   .gallery .card {
-    width: min(var(--card-w), 100%);
-    height: auto;
-    aspect-ratio: 107 / 138;
+    zoom: 0.78;
   }
 }

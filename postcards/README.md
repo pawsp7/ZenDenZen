@@ -1,20 +1,20 @@
-# Zen postcards
+# Postcards to Future Me
 
-Three simple templates at **10.7 × 13.8 cm**.
+Three zen postcard **backs** at **10.7 × 13.8 cm**, drawn for white construction paper.
 
-| Card | Front | Back |
-| --- | --- | --- |
-| Stillness | Ink enso, gold sun | Note + address |
-| Breathe | Mist mountains | Note + address |
-| Balance | Three stones | Note + address |
+Participants write a hope or well wish to their future selves. The cards are mailed back a few months later.
+
+| Card | Prompt |
+| --- | --- |
+| Arriving | To the you who is arriving |
+| Horizon | May the days ahead be kind |
+| Tended | What you plant with care |
+
+Each back has a letter to “Dear future me,” an address block, a stamp box, and a date line.
 
 ## Print
 
-- [zen-postcards.pdf](./pdf/zen-postcards.pdf) — six pages, each **10.7 × 13.8 cm** (front then back for each card)
-- [zen-postcards-a4.pdf](./pdf/zen-postcards-a4.pdf) — same six faces on A4 with crop marks
+- [zen-postcards.pdf](./pdf/zen-postcards.pdf) — three pages, each **10.7 × 13.8 cm**
+- [zen-postcards-a4.pdf](./pdf/zen-postcards-a4.pdf) — the same backs on A4 with crop marks
 
-Set the printer to **100% / actual size**. Do not fit to page.
-
-For a finished card, print double-sided and flip on the short edge, then trim.
-
-Open [index.html](./index.html) to preview, or [print-exact.html](./print-exact.html) / [print-a4.html](./print-a4.html) to print from the browser.
+Print on **white construction paper** at **100% / actual size**. Do not fit to page.

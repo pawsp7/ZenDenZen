@@ -1,110 +1,105 @@
 #!/usr/bin/env python3
-"""Build postcard print HTML from shared card faces."""
+"""Build postcard print HTML — backs only, 10.7 × 13.8 cm."""
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
 MOTIFS = """
     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="sprite">
-      <symbol id="motif-stillness" viewBox="0 0 36 36">
-        <circle cx="18" cy="18" r="11.5" fill="none" stroke="#2a2620" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="62 10" transform="rotate(-24 18 18)"/>
-        <circle cx="26.5" cy="9.5" r="1.6" fill="#c4a574"/>
+      <symbol id="motif-arriving" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="19" r="11.2" stroke="#2a2620" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="58 12" transform="rotate(-28 18 19)"/>
+        <circle cx="26.2" cy="8.8" r="1.55" fill="#b08d55" stroke="none"/>
       </symbol>
-      <symbol id="motif-breathe" viewBox="0 0 36 36">
-        <path d="M4 26 L13 12 L22 26 Z" fill="#8a9a78" opacity="0.85"/>
-        <path d="M14 26 L24 10 L33 26 Z" fill="#6f7a6a"/>
-        <circle cx="24.5" cy="8" r="2" fill="#c4a574"/>
+      <symbol id="motif-horizon" viewBox="0 0 36 36" fill="none">
+        <path d="M3 27 L13.5 13 L21 24 L27.5 16 L34 27" stroke="#7d8c6c" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24.5" cy="10" r="2" fill="#b08d55" stroke="none"/>
       </symbol>
-      <symbol id="motif-balance" viewBox="0 0 36 36">
-        <ellipse cx="18" cy="25.5" rx="9" ry="3.4" fill="#5c5852"/>
-        <ellipse cx="18" cy="20.2" rx="7" ry="2.8" fill="#8a8378"/>
-        <ellipse cx="18" cy="15.4" rx="5.1" ry="2.3" fill="#4f4b46"/>
-        <ellipse cx="20.2" cy="12.6" rx="2.1" ry="1.1" fill="#8a9a78"/>
+      <symbol id="motif-tended" viewBox="0 0 36 36" fill="none">
+        <path d="M18 30 V16" stroke="#2a2620" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M18 22 C12 20 11 13 16 12 C17 17 18 20 18 22" stroke="#7d8c6c" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 20 C24 18 26 12 21 11 C20 16 18 19 18 20" stroke="#7d8c6c" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
       </symbol>
     </svg>
 """
 
 CARDS = [
     {
-        "id": "stillness",
-        "n": "one",
-        "alt": "Ink enso circle and a gold sun on rice paper",
+        "id": "arriving",
+        "prompt": "To the you who is arriving",
+        "wish": "a quiet hope, sent forward",
+        "letter_lines": 10,
+        "address_lines": 4,
     },
     {
-        "id": "breathe",
-        "n": "two",
-        "alt": "Misty watercolor mountains under a gold sun",
+        "id": "horizon",
+        "prompt": "May the days ahead be kind",
+        "wish": "the path keeps opening",
+        "letter_lines": 10,
+        "address_lines": 4,
     },
     {
-        "id": "balance",
-        "n": "three",
-        "alt": "Stacked river stones with a leaf and sand ripples",
+        "id": "tended",
+        "prompt": "What you plant with care",
+        "wish": "arriving in a little while",
+        "letter_lines": 10,
+        "address_lines": 4,
     },
 ]
 
 
-def front(card):
+def lines(n):
+    return "<span></span>" * n
+
+
+def card(c):
     return f"""
-          <article class="card front theme-{card['id']}">
-            <img class="art" src="./art/{card['id']}.jpg" alt="{card['alt']}" />
+          <article class="card theme-{c['id']}">
             <div class="frame"></div>
-            <p class="word">{card['id']}</p>
-          </article>"""
-
-
-def back(card):
-    return f"""
-          <article class="card back theme-{card['id']}">
-            <div class="back-head">
-              <svg aria-hidden="true"><use href="#motif-{card['id']}"/></svg>
-              <div>
-                <p class="back-kicker">Postcard {card['n']}</p>
-                <div class="name">{card['id']}</div>
-              </div>
-            </div>
+            <header class="head">
+              <svg aria-hidden="true"><use href="#motif-{c['id']}"/></svg>
+              <p class="event">Postcards to Future Me</p>
+              <h3 class="prompt">{c['prompt']}</h3>
+            </header>
             <div class="split">
-              <section>
-                <p class="label">A quiet note</p>
-                <div class="lines" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <section class="letter">
+                <p class="salute">Dear future me,</p>
+                <div class="lines" aria-hidden="true">{lines(c['letter_lines'])}</div>
               </section>
               <div class="rule" aria-hidden="true"></div>
               <section class="address">
                 <div class="stamp">stamp</div>
-                <p class="label">Post</p>
-                <div class="lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                <p class="label">My address</p>
+                <div class="lines" aria-hidden="true">{lines(c['address_lines'])}</div>
               </section>
             </div>
-            <div class="back-foot">
-              <span class="brand">ZenDenZen</span>
-              <span>10.7 × 13.8 cm</span>
-            </div>
+            <footer class="foot">
+              <span class="date">Written <span class="blank"></span></span>
+              <span class="wish">{c['wish']}</span>
+            </footer>
           </article>"""
 
 
 def exact_pages():
-    pages = []
-    for card in CARDS:
-        pages.append(f'<div class="page">{front(card)}\n        </div>')
-        pages.append(f'<div class="page">{back(card)}\n        </div>')
-    return "\n        ".join(pages)
+    return "\n        ".join(
+        f'<div class="page">{card(c)}\n        </div>' for c in CARDS
+    )
 
 
 def a4_sheets():
     sheets = []
-    for card in CARDS:
-        for side, body in (("front", front(card)), ("back", back(card))):
-            sheets.append(
-                f"""<div class="sheet">
-          <p class="cut-label">{card['id']} · {side} · trim to 10.7 × 13.8 cm</p>
+    for c in CARDS:
+        sheets.append(
+            f"""<div class="sheet">
+          <p class="cut-label">{c['id']} · Postcards to Future Me · trim to 10.7 × 13.8 cm</p>
           <div class="trim">
             <span class="mark tl-h"></span><span class="mark tl-v"></span>
             <span class="mark tr-h"></span><span class="mark tr-v"></span>
             <span class="mark bl-h"></span><span class="mark bl-v"></span>
             <span class="mark br-h"></span><span class="mark br-v"></span>
-            {body}
+            {card(c)}
           </div>
         </div>"""
-            )
+        )
     return "\n        ".join(sheets)
 
 
@@ -126,9 +121,9 @@ FOOT = """
 </html>
 """
 
-exact = (
+(ROOT / "print-exact.html").write_text(
     HEAD.format(
-        title="Print zen postcards — 10.7 × 13.8 cm",
+        title="Print Postcards to Future Me — 10.7 × 13.8 cm",
         print_css="print-exact.css",
         motifs=MOTIFS,
     )
@@ -137,9 +132,9 @@ exact = (
     + FOOT
 )
 
-a4 = (
+(ROOT / "print-a4.html").write_text(
     HEAD.format(
-        title="Print zen postcards on A4 — crop to 10.7 × 13.8 cm",
+        title="Print Postcards to Future Me on A4 — crop to 10.7 × 13.8 cm",
         print_css="print-a4.css",
         motifs=MOTIFS,
     )
@@ -148,6 +143,4 @@ a4 = (
     + FOOT
 )
 
-(ROOT / "print-exact.html").write_text(exact)
-(ROOT / "print-a4.html").write_text(a4)
 print("wrote print-exact.html and print-a4.html")
