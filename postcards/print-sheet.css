@@ -1,0 +1,40 @@
+@page {
+  size: 214mm 276mm;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+.pack {
+  box-sizing: border-box;
+  width: 214mm;
+  height: 276mm;
+  display: grid;
+  grid-template-columns: 107mm 107mm;
+  grid-template-rows: 138mm 138mm;
+  gap: 0;
+  overflow: hidden;
+}
+
+.pack .card {
+  width: 107mm;
+  height: 138mm;
+}
+
+@media screen {
+  body {
+    background: #d9d2c5;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .pack {
+    box-shadow: 0 16px 40px rgba(42, 38, 32, 0.18);
+  }
+}

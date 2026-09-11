@@ -19,6 +19,10 @@ MOTIFS = """
         <path d="M18 22 C12 20 11 13 16 12 C17 17 18 20 18 22" stroke="#7d8c6c" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M18 20 C24 18 26 12 21 11 C20 16 18 19 18 20" stroke="#7d8c6c" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
       </symbol>
+      <symbol id="motif-later" viewBox="0 0 36 36" fill="none">
+        <path d="M21 8.2 A10.4 10.4 0 1 0 21 27.8 A7.6 7.6 0 1 1 21 8.2 Z" stroke="#2a2620" stroke-width="1.45" stroke-linejoin="round"/>
+        <circle cx="26.4" cy="10.2" r="1.45" fill="#b08d55" stroke="none"/>
+      </symbol>
     </svg>
 """
 
@@ -41,6 +45,13 @@ CARDS = [
         "id": "tended",
         "prompt": "What you plant with care",
         "wish": "arriving in a little while",
+        "letter_lines": 10,
+        "address_lines": 4,
+    },
+    {
+        "id": "later",
+        "prompt": "This quiet will find you",
+        "wish": "a light for the later hour",
         "letter_lines": 10,
         "address_lines": 4,
     },
@@ -83,6 +94,11 @@ def exact_pages():
     return "\n        ".join(
         f'<div class="page">{card(c)}\n        </div>' for c in CARDS
     )
+
+
+def sheet_2x2():
+    cells = "\n        ".join(card(c) for c in CARDS)
+    return f'<div class="pack">\n        {cells}\n        </div>'
 
 
 def a4_sheets():
@@ -143,4 +159,15 @@ FOOT = """
     + FOOT
 )
 
-print("wrote print-exact.html and print-a4.html")
+(ROOT / "print-sheet.html").write_text(
+    HEAD.format(
+        title="Print Postcards to Future Me — 21.4 × 27.6 cm sheet",
+        print_css="print-sheet.css",
+        motifs=MOTIFS,
+    )
+    + "        "
+    + sheet_2x2()
+    + FOOT
+)
+
+print("wrote print-exact.html, print-a4.html, and print-sheet.html")
