@@ -1,0 +1,174 @@
+/* Postcard backs — 10.7cm × 13.8cm, ink on white construction paper */
+:root {
+  --card-w: 107mm;
+  --card-h: 138mm;
+  --ink: #2a2620;
+  --muted: rgba(42, 38, 32, 0.52);
+  --gold: #b08d55;
+  --sage: #7d8c6c;
+  --line: rgba(42, 38, 32, 0.2);
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.card {
+  box-sizing: border-box;
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 8mm 8mm 7mm;
+  color: var(--ink);
+  background: #fff;
+  font-family: Outfit, system-ui, sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.frame {
+  position: absolute;
+  inset: 4.5mm;
+  border: 0.18mm solid rgba(42, 38, 32, 0.22);
+  pointer-events: none;
+}
+
+.head {
+  text-align: center;
+  margin: 1.5mm 0 4.5mm;
+}
+
+.head svg {
+  display: block;
+  width: 11mm;
+  height: 11mm;
+  margin: 0 auto 2.4mm;
+}
+
+.event {
+  margin: 0;
+  font-size: 6pt;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prompt {
+  margin: 2mm 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 13.5pt;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.35fr 0.16mm 0.9fr;
+  gap: 4.8mm;
+  min-height: 0;
+}
+
+.rule {
+  background: var(--line);
+  width: 0.16mm;
+  justify-self: center;
+}
+
+.salute {
+  margin: 0 0 3.2mm;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 10.5pt;
+  color: var(--ink);
+}
+
+.label {
+  margin: 0 0 3.2mm;
+  font-size: 6pt;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6.5mm;
+}
+
+.lines span {
+  display: block;
+  height: 0;
+  border-bottom: 0.16mm solid var(--line);
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+}
+
+.stamp {
+  box-sizing: border-box;
+  width: 16mm;
+  height: 20mm;
+  margin: 0 0 0 auto;
+  border: 0.2mm dashed rgba(42, 38, 32, 0.32);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2mm;
+  font-size: 5.2pt;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(42, 38, 32, 0.38);
+}
+
+.address .label {
+  margin-top: auto;
+}
+
+.address .lines {
+  gap: 7.2mm;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4mm;
+  margin-top: 5mm;
+  font-size: 6.2pt;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.foot .date {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2mm;
+}
+
+.foot .blank {
+  display: inline-block;
+  width: 22mm;
+  border-bottom: 0.16mm solid var(--line);
+  transform: translateY(-0.6mm);
+}
+
+.wish {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  font-size: 8.5pt;
+  color: var(--ink);
+}

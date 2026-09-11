@@ -1,0 +1,132 @@
+html,
+body {
+  margin: 0;
+  background: #e8e2d8;
+  color: #2a2620;
+  font-family: Outfit, system-ui, sans-serif;
+}
+
+.page-head {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 36px 24px 12px;
+}
+
+.home {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #8a7a62;
+  text-decoration: none;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #b08d55;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: 0.95;
+  margin: 8px 0 12px;
+}
+
+.lede {
+  max-width: 40em;
+  line-height: 1.55;
+  color: rgba(42, 38, 32, 0.72);
+  font-weight: 300;
+}
+
+.lede strong {
+  font-weight: 400;
+  color: #2a2620;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 8px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #2a2620;
+  color: #f4efe6;
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #2a2620;
+  border: 1px solid rgba(42, 38, 32, 0.22);
+}
+
+.gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px 28px;
+}
+
+.gallery section {
+  max-width: var(--card-w);
+}
+
+.gallery h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.7rem;
+  margin: 0 0 4px;
+}
+
+.gallery section > p {
+  margin: 0 0 14px;
+  color: rgba(42, 38, 32, 0.62);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.gallery .card {
+  box-shadow: 0 16px 36px rgba(42, 38, 32, 0.12);
+}
+
+.how {
+  max-width: 720px;
+  margin: 0 auto 64px;
+  padding: 8px 24px;
+}
+
+.how h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+
+.how ol {
+  padding-left: 1.2em;
+  line-height: 1.6;
+  color: rgba(42, 38, 32, 0.76);
+  font-weight: 300;
+}
+
+@media (max-width: 720px) {
+  .gallery .card {
+    zoom: 0.78;
+  }
+}

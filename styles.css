@@ -227,6 +227,15 @@ body[data-mood="dusk"] .wash {
   color: var(--muted);
 }
 
+.gate-card .hint a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.gate-card .hint + .hint {
+  margin-top: 8px;
+}
+
 .topbar,
 .hud,
 .credits {
