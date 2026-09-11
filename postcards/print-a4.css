@@ -1,0 +1,86 @@
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+.sheet {
+  box-sizing: border-box;
+  width: 210mm;
+  height: 297mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8mm;
+  page-break-after: always;
+  break-after: page;
+}
+
+.sheet:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.cut-label {
+  margin: 0;
+  font-family: Outfit, system-ui, sans-serif;
+  font-size: 8pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7a7368;
+}
+
+.trim {
+  position: relative;
+  width: 107mm;
+  height: 138mm;
+}
+
+.mark {
+  position: absolute;
+  background: #1c1a16;
+}
+
+.mark.tl-h,
+.mark.tr-h,
+.mark.bl-h,
+.mark.br-h {
+  width: 5mm;
+  height: 0.15mm;
+}
+
+.mark.tl-v,
+.mark.tr-v,
+.mark.bl-v,
+.mark.br-v {
+  width: 0.15mm;
+  height: 5mm;
+}
+
+.tl-h { top: -3mm; left: -8mm; }
+.tl-v { top: -8mm; left: -3mm; }
+.tr-h { top: -3mm; right: -8mm; }
+.tr-v { top: -8mm; right: -3mm; }
+.bl-h { bottom: -3mm; left: -8mm; }
+.bl-v { bottom: -8mm; left: -3mm; }
+.br-h { bottom: -3mm; right: -8mm; }
+.br-v { bottom: -8mm; right: -3mm; }
+
+@media screen {
+  body {
+    background: #d9d2c5;
+  }
+
+  .sheet {
+    margin: 0 auto 16px;
+    background: #fff;
+    box-shadow: 0 12px 32px rgba(42, 38, 32, 0.12);
+  }
+}

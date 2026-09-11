@@ -11,6 +11,7 @@ Live site: [https://pawsp7.github.io/ZenDenZen/](https://pawsp7.github.io/ZenDen
 - A spa soundtrack (Mixkit) plus a live spa bed: warm pad, singing bowls, and scene air
 - One click to enter, then the den keeps picture and sound together
 - Scene keys `1`–`4`, atmosphere `Q` `W` `E` or `[` `]`, space to pause, `M` to mute, `F` for fullscreen
+- Printable zen postcards at [postcards/](./postcards/) — 10.7 × 13.8 cm
 
 ## Atmospheres
 

@@ -1,0 +1,218 @@
+/* Printable zen postcard faces — 10.7cm × 13.8cm */
+:root {
+  --card-w: 107mm;
+  --card-h: 138mm;
+  --ink: #2a2620;
+  --muted: rgba(42, 38, 32, 0.55);
+  --gold: #c4a574;
+  --sage: #8a9a78;
+  --line: rgba(42, 38, 32, 0.22);
+  --paper-still: #f3eee4;
+  --paper-breathe: #e7ebe3;
+  --paper-balance: #e6d7be;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.card {
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--paper-still);
+  font-family: Outfit, system-ui, sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.card img.art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card .frame {
+  position: absolute;
+  inset: 6mm;
+  border: 0.18mm solid rgba(42, 38, 32, 0.2);
+  pointer-events: none;
+}
+
+.theme-breathe .frame {
+  border-color: rgba(244, 239, 230, 0.34);
+}
+
+.theme-balance .frame {
+  border-color: rgba(42, 38, 32, 0.16);
+}
+
+.card .word {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 9mm;
+  margin: 0;
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 12.5pt;
+  letter-spacing: 0.46em;
+  text-indent: 0.46em;
+  line-height: 1;
+}
+
+.theme-stillness .word {
+  color: #2a2620;
+}
+
+.theme-breathe .word {
+  color: #f6f3ec;
+  text-shadow: 0 1px 10px rgba(42, 38, 32, 0.28);
+}
+
+.theme-balance .word {
+  bottom: auto;
+  top: 10mm;
+  color: #3a342c;
+}
+
+/* —— backs —— */
+.card.back {
+  box-sizing: border-box;
+  padding: 9mm 8.5mm 8mm;
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-stillness.back {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.35), transparent 55%),
+    var(--paper-still);
+}
+
+.theme-breathe.back {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.28), transparent 55%),
+    var(--paper-breathe);
+}
+
+.theme-balance.back {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.22), transparent 55%),
+    var(--paper-balance);
+}
+
+.back-head {
+  display: flex;
+  align-items: center;
+  gap: 3.2mm;
+  margin-bottom: 6mm;
+}
+
+.back-head svg {
+  width: 9mm;
+  height: 9mm;
+  flex: none;
+}
+
+.back-head .name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 13pt;
+  letter-spacing: 0.22em;
+}
+
+.back-kicker {
+  margin: 0 0 1mm;
+  font-size: 6.2pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 0.18mm 1fr;
+  gap: 5.5mm;
+  min-height: 0;
+}
+
+.rule {
+  background: var(--line);
+  width: 0.18mm;
+  justify-self: center;
+}
+
+.label {
+  margin: 0 0 3.5mm;
+  font-size: 6.4pt;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 7.2mm;
+}
+
+.lines span {
+  display: block;
+  height: 0;
+  border-bottom: 0.18mm solid var(--line);
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+}
+
+.stamp {
+  width: 18mm;
+  height: 22mm;
+  margin: 0 0 7mm auto;
+  border: 0.22mm dashed rgba(42, 38, 32, 0.32);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2.2mm;
+  font-size: 5.6pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(42, 38, 32, 0.38);
+}
+
+.address .lines {
+  margin-top: auto;
+  gap: 8mm;
+}
+
+.back-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 6mm;
+  font-size: 6.4pt;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.back-foot .brand {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  font-size: 9pt;
+  color: var(--ink);
+}

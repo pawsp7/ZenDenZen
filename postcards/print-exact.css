@@ -1,0 +1,39 @@
+@page {
+  size: 107mm 138mm;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+.page {
+  width: 107mm;
+  height: 138mm;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+}
+
+.page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+@media screen {
+  body {
+    background: #d9d2c5;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .page {
+    box-shadow: 0 16px 40px rgba(42, 38, 32, 0.18);
+  }
+}
