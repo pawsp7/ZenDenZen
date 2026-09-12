@@ -10,9 +10,9 @@ const SCENES = {
         plate: "./plates/mountains-mist.jpg",
         mood: "dawn",
         live: {
-          clouds: { y0: 0.02, y1: 0.34, speed: 14, alpha: 0.38 },
-          fog: { y0: 0.36, y1: 0.64, amp: 48, alpha: 0.5, speed: 0.28 },
-          sway: { y0: 0.68, y1: 1, amp: 6, freq: 0.02, speed: 1.4 },
+          clouds: { y0: 0.0, y1: 0.28, speed: 22, alpha: 0.55 },
+          fog: { y0: 0.32, y1: 0.7, amp: 70, alpha: 0.62, speed: 0.32 },
+          sway: { y0: 0.7, y1: 1, amp: 18, freq: 0.018, speed: 1.55, ghost: true },
           rays: { x: 0.2, y: 0.4 },
           pollen: true,
         },
@@ -24,10 +24,14 @@ const SCENES = {
         plate: "./plates/mountains-lake.jpg",
         mood: "day",
         live: {
-          clouds: { y0: 0.0, y1: 0.3, speed: 12, alpha: 0.32 },
-          water: { y0: 0.48, y1: 1, amp: 14, freq: 0.038, speed: 2.3 },
-          sway: { y0: 0.28, y1: 0.52, amp: 4.5, freq: 0.016, speed: 1.15 },
-          sparkles: { y0: 0.5, y1: 0.92 },
+          clouds: { y0: 0.0, y1: 0.28, speed: 20, alpha: 0.5 },
+          water: { y0: 0.46, y1: 0.98, amp: 26, freq: 0.028, speed: 2.6 },
+          sway: [
+            { x0: 0.52, x1: 1, y0: 0.22, y1: 0.52, amp: 14, freq: 0.02, speed: 1.2 },
+            { x0: 0.0, x1: 0.22, y0: 0.72, y1: 1, amp: 12, freq: 0.03, speed: 1.4, ghost: true },
+          ],
+          falls: { x0: 0.07, x1: 0.2, y0: 0.18, y1: 0.52, speed: 48 },
+          sparkles: { y0: 0.5, y1: 0.94 },
           pollen: true,
         },
       },
@@ -41,7 +45,9 @@ const SCENES = {
           stars: true,
           aurora: true,
           snow: true,
-          water: { y0: 0.62, y1: 1, amp: 7, freq: 0.05, speed: 1.4 },
+          fog: { y0: 0.58, y1: 0.86, amp: 36, alpha: 0.32, speed: 0.2 },
+          sway: { y0: 0.42, y1: 0.62, amp: 10, freq: 0.02, speed: 0.9 },
+          sparkles: { y0: 0.58, y1: 0.96 },
         },
       },
     ],
@@ -57,10 +63,12 @@ const SCENES = {
         plate: "./plates/spa-onsen.jpg",
         mood: "night",
         live: {
-          water: { y0: 0.52, y1: 0.86, amp: 11, freq: 0.055, speed: 2.1 },
-          steam: { x0: 0.28, x1: 0.92, y0: 0.42, y1: 0.86 },
+          water: { x0: 0.38, x1: 1, y0: 0.5, y1: 0.9, amp: 22, freq: 0.045, speed: 2.4 },
+          steam: { x0: 0.32, x1: 0.96, y0: 0.38, y1: 0.86 },
+          falls: { x0: 0.84, x1: 0.96, y0: 0.42, y1: 0.62, speed: 56 },
+          sway: { x0: 0.1, x1: 0.5, y0: 0.12, y1: 0.52, amp: 12, freq: 0.022, speed: 1.15 },
           flicker: true,
-          sparkles: { y0: 0.55, y1: 0.82 },
+          sparkles: { y0: 0.52, y1: 0.86 },
         },
       },
       {
@@ -70,11 +78,15 @@ const SCENES = {
         plate: "./plates/spa-infinity.jpg",
         mood: "dusk",
         live: {
-          water: { y0: 0.42, y1: 0.86, amp: 13, freq: 0.042, speed: 2.4 },
-          steam: { x0: 0.1, x1: 0.9, y0: 0.4, y1: 0.78 },
-          rays: { x: 0.72, y: 0.42 },
-          sparkles: { y0: 0.46, y1: 0.84 },
-          sway: { y0: 0.2, y1: 0.55, amp: 5, freq: 0.018, speed: 1.1 },
+          water: { y0: 0.38, y1: 0.72, amp: 28, freq: 0.032, speed: 2.5 },
+          steam: { x0: 0.18, x1: 0.78, y0: 0.36, y1: 0.7 },
+          fog: { y0: 0.16, y1: 0.4, amp: 44, alpha: 0.4, speed: 0.22 },
+          rays: { x: 0.12, y: 0.38 },
+          sparkles: { y0: 0.4, y1: 0.72 },
+          sway: [
+            { x0: 0.0, x1: 0.3, y0: 0.46, y1: 1, amp: 16, freq: 0.02, speed: 1.2, ghost: true },
+            { x0: 0.62, x1: 1, y0: 0.2, y1: 0.7, amp: 14, freq: 0.018, speed: 1.05 },
+          ],
         },
       },
       {
@@ -85,7 +97,10 @@ const SCENES = {
         mood: "dusk",
         live: {
           rain: true,
-          water: { y0: 0.68, y1: 1, amp: 8, freq: 0.07, speed: 1.8 },
+          water: { y0: 0.7, y1: 1, amp: 18, freq: 0.055, speed: 2.1 },
+          steam: { x0: 0.08, x1: 0.92, y0: 0.62, y1: 0.96 },
+          falls: { x0: 0.02, x1: 0.12, y0: 0.58, y1: 0.78, speed: 52 },
+          sway: { y0: 0.08, y1: 0.62, amp: 11, freq: 0.016, speed: 1.05 },
           flicker: true,
         },
       },
@@ -102,8 +117,9 @@ const SCENES = {
         plate: "./plates/garden-rose.jpg",
         mood: "day",
         live: {
-          clouds: { y0: 0.0, y1: 0.22, speed: 10, alpha: 0.26 },
-          sway: { y0: 0.12, y1: 1, amp: 8, freq: 0.014, speed: 1.25 },
+          clouds: { y0: 0.0, y1: 0.2, speed: 16, alpha: 0.42 },
+          water: { x0: 0.0, x1: 0.34, y0: 0.58, y1: 0.9, amp: 16, freq: 0.05, speed: 2.0 },
+          sway: { y0: 0.16, y1: 1, amp: 20, freq: 0.014, speed: 1.35, ghost: true },
           petals: "blush",
           pollen: true,
           rays: { x: 0.78, y: 0.18 },
@@ -116,10 +132,14 @@ const SCENES = {
         plate: "./plates/garden-zen.jpg",
         mood: "day",
         live: {
-          water: { y0: 0.58, y1: 0.92, amp: 11, freq: 0.05, speed: 1.9 },
-          sway: { y0: 0.08, y1: 0.7, amp: 6.5, freq: 0.014, speed: 1.15 },
+          water: { y0: 0.5, y1: 0.98, amp: 24, freq: 0.036, speed: 2.2 },
+          sway: [
+            { x0: 0.0, x1: 0.58, y0: 0.0, y1: 0.56, amp: 16, freq: 0.016, speed: 1.2, ghost: true },
+            { x0: 0.52, x1: 1, y0: 0.02, y1: 0.58, amp: 12, freq: 0.02, speed: 1.05 },
+          ],
           petals: "maple",
-          sparkles: { y0: 0.6, y1: 0.88 },
+          sparkles: { y0: 0.54, y1: 0.92 },
+          pollen: true,
         },
       },
       {
@@ -129,8 +149,10 @@ const SCENES = {
         plate: "./plates/garden-lantern.jpg",
         mood: "dusk",
         live: {
-          sway: { y0: 0.15, y1: 1, amp: 6, freq: 0.016, speed: 1.1 },
-          fireflies: 0.7,
+          water: { x0: 0.58, x1: 1, y0: 0.62, y1: 0.98, amp: 14, freq: 0.05, speed: 1.8 },
+          sway: { y0: 0.12, y1: 0.78, amp: 16, freq: 0.016, speed: 1.15, ghost: true },
+          fireflies: 0.75,
+          stars: true,
           flicker: true,
           pollen: true,
         },
@@ -148,10 +170,11 @@ const SCENES = {
         plate: "./plates/meadow-dawn.jpg",
         mood: "dawn",
         live: {
-          clouds: { y0: 0.0, y1: 0.36, speed: 12, alpha: 0.34 },
-          fog: { y0: 0.4, y1: 0.72, amp: 52, alpha: 0.48, speed: 0.22 },
-          sway: { y0: 0.42, y1: 1, amp: 10, freq: 0.016, speed: 1.45 },
+          clouds: { y0: 0.0, y1: 0.28, speed: 18, alpha: 0.4 },
+          fog: { y0: 0.32, y1: 0.68, amp: 78, alpha: 0.58, speed: 0.26 },
+          sway: { y0: 0.58, y1: 1, amp: 22, freq: 0.015, speed: 1.5, ghost: true },
           pollen: true,
+          rays: { x: 0.5, y: 0.34 },
         },
       },
       {
@@ -161,8 +184,8 @@ const SCENES = {
         plate: "./plates/meadow-lavender.jpg",
         mood: "day",
         live: {
-          clouds: { y0: 0.0, y1: 0.38, speed: 14, alpha: 0.36 },
-          sway: { y0: 0.34, y1: 1, amp: 13, freq: 0.012, speed: 1.5 },
+          clouds: { y0: 0.0, y1: 0.36, speed: 24, alpha: 0.52 },
+          sway: { y0: 0.3, y1: 1, amp: 26, freq: 0.012, speed: 1.65, ghost: true },
           pollen: true,
         },
       },
@@ -173,8 +196,9 @@ const SCENES = {
         plate: "./plates/meadow-fireflies.jpg",
         mood: "night",
         live: {
-          fog: { y0: 0.42, y1: 0.68, amp: 40, alpha: 0.36, speed: 0.18 },
-          sway: { y0: 0.4, y1: 1, amp: 9, freq: 0.017, speed: 1.25 },
+          clouds: { y0: 0.0, y1: 0.32, speed: 12, alpha: 0.34 },
+          fog: { y0: 0.34, y1: 0.62, amp: 54, alpha: 0.46, speed: 0.2 },
+          sway: { y0: 0.48, y1: 1, amp: 20, freq: 0.016, speed: 1.3, ghost: true },
           fireflies: 1,
         },
       },
@@ -185,6 +209,11 @@ const SCENES = {
 function optionOf(scene, index) {
   const list = SCENES[scene].options;
   return list[((index % list.length) + list.length) % list.length];
+}
+
+function eachSpec(value, fn) {
+  if (!value) return;
+  (Array.isArray(value) ? value : [value]).forEach(fn);
 }
 
 class AmbientView {
@@ -251,62 +280,68 @@ class AmbientView {
 
   prime() {
     const n = (count, make) => Array.from({ length: count }, make);
-    this.motes = n(70, (_, i) => ({
+    this.motes = n(110, (_, i) => ({
       x: (i * 0.137 + 0.04) % 1,
       y: (i * 0.211 + 0.07) % 1,
-      r: 1.1 + (i % 5) * 0.55,
-      v: 0.012 + (i % 6) * 0.004,
-      drift: 0.04 + (i % 4) * 0.02,
+      r: 1.4 + (i % 5) * 0.7,
+      v: 0.018 + (i % 6) * 0.006,
+      drift: 0.05 + (i % 4) * 0.025,
     }));
-    this.stars = n(110, (_, i) => ({
+    this.stars = n(130, (_, i) => ({
       x: (i * 0.061 + 0.02) % 1,
       y: (i * 0.037) % 0.52,
-      r: 0.6 + (i % 5) * 0.35,
+      r: 0.7 + (i % 5) * 0.4,
       tw: 0.7 + (i % 7) * 0.25,
     }));
-    this.snow = n(90, (_, i) => ({
+    this.snow = n(140, (_, i) => ({
       x: (i * 0.083) % 1,
       y: (i * 0.17) % 1,
-      r: 1.1 + (i % 4) * 0.7,
-      v: 0.045 + (i % 5) * 0.02,
-      w: 0.02 + (i % 3) * 0.012,
+      r: 1.6 + (i % 4) * 1.1,
+      v: 0.06 + (i % 5) * 0.028,
+      w: 0.025 + (i % 3) * 0.016,
     }));
-    this.steam = n(55, (_, i) => ({
+    this.steam = n(70, (_, i) => ({
       x: (i * 0.073) % 1,
       y: (i * 0.11) % 1,
-      r: 16 + (i % 6) * 10,
-      v: 0.055 + (i % 5) * 0.02,
-      wobble: 0.03 + (i % 4) * 0.015,
+      r: 22 + (i % 6) * 14,
+      v: 0.07 + (i % 5) * 0.028,
+      wobble: 0.04 + (i % 4) * 0.02,
     }));
-    this.rain = n(160, (_, i) => ({
+    this.rain = n(190, (_, i) => ({
       x: (i * 0.047) % 1,
       y: (i * 0.13) % 1,
-      len: 16 + (i % 8) * 6,
-      v: 1.15 + (i % 6) * 0.18,
+      len: 18 + (i % 8) * 7,
+      v: 1.2 + (i % 6) * 0.2,
     }));
-    this.beads = n(22, (_, i) => ({
-      x: 0.06 + (i % 11) * 0.085,
-      y: 0.06 + Math.floor(i / 11) * 0.2 + (i % 5) * 0.03,
-      r: 1.8 + (i % 4) * 0.7,
+    this.beads = n(28, (_, i) => ({
+      x: 0.04 + (i % 14) * 0.068,
+      y: 0.05 + Math.floor(i / 14) * 0.18 + (i % 5) * 0.03,
+      r: 2.2 + (i % 4) * 0.9,
     }));
-    this.fireflies = n(42, (_, i) => ({
+    this.fireflies = n(56, (_, i) => ({
       x: (i * 0.157) % 1,
       y: 0.28 + (i * 0.09) % 0.62,
-      r: 1.6 + (i % 3) * 0.7,
-      v: 0.22 + (i % 4) * 0.08,
+      r: 1.8 + (i % 3) * 0.8,
+      v: 0.24 + (i % 4) * 0.09,
       pulse: 1.1 + (i % 5) * 0.35,
     }));
-    this.petals = n(28, (_, i) => ({
+    this.petals = n(42, (_, i) => ({
       x: (i * 0.19) % 1,
       y: (i * 0.27) % 1,
-      s: 5.5 + (i % 4) * 2.4,
-      v: 0.055 + (i % 4) * 0.02,
+      s: 6.5 + (i % 4) * 2.8,
+      v: 0.07 + (i % 4) * 0.028,
       spin: 0.7 + (i % 5) * 0.25,
     }));
-    this.sparkles = n(36, (_, i) => ({
+    this.sparkles = n(64, (_, i) => ({
       x: (i * 0.11) % 1,
       y: (i * 0.07) % 1,
       life: (i * 0.17) % 1,
+    }));
+    this.foam = n(95, (_, i) => ({
+      x: (i * 0.091) % 1,
+      y: (i * 0.137) % 1,
+      s: 1.4 + (i % 5) * 0.9,
+      v: 0.055 + (i % 6) * 0.02,
     }));
   }
 
@@ -350,14 +385,19 @@ class AmbientView {
     ctx.drawImage(this.source, 0, 0);
     const live = option.live || {};
     if (!this.reduced) {
-      if (live.clouds) this.liveClouds(t, live.clouds);
+      eachSpec(live.sway, (spec) => this.liveSway(t, spec));
+      eachSpec(live.water, (spec) => this.liveWater(t, spec));
+      eachSpec(live.falls, (spec) => this.liveFalls(t, spec));
       if (live.fog) this.liveFog(t, live.fog);
-      if (live.water) this.liveWater(t, live.water);
-      if (live.sway) this.liveSway(t, live.sway);
+      if (live.clouds) this.liveClouds(t, live.clouds);
     }
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     if (this.reduced) return;
 
+    eachSpec(live.water, (spec) => {
+      this.liveCaustics(t, spec);
+      this.liveFoam(t, spec);
+    });
     if (live.rays) this.liveRays(t, live.rays);
     if (live.sparkles) this.liveSparkles(t, live.sparkles);
     if (live.steam) this.liveSteam(t, live.steam);
@@ -377,11 +417,17 @@ class AmbientView {
     const H = source.height;
     const y = spec.y0 * H;
     const hh = Math.max(1, (spec.y1 - spec.y0) * H);
-    const shift = (t * spec.speed * this.dpr) % W;
+    const amp = Math.max(36, spec.speed) * this.dpr;
+    const shift = Math.sin(t * 0.16) * amp + Math.sin(t * 0.07) * amp * 0.4;
+    const extra = Math.abs(shift) + 12;
     ctx.save();
-    ctx.globalAlpha = spec.alpha;
-    ctx.drawImage(source, 0, y, W, hh, shift, y, W, hh);
-    ctx.drawImage(source, 0, y, W, hh, shift - W, y, W, hh);
+    ctx.beginPath();
+    ctx.rect(0, y, W, hh);
+    ctx.clip();
+    ctx.globalAlpha = spec.alpha * 0.8;
+    ctx.drawImage(source, 0, y, W, hh, shift - extra, y, W + extra * 2, hh);
+    ctx.globalAlpha = spec.alpha * 0.38;
+    ctx.drawImage(source, 0, y, W, hh, -shift * 0.45 - extra, y + Math.sin(t * 0.22) * 8, W + extra * 2, hh);
     ctx.restore();
   }
 
@@ -392,14 +438,26 @@ class AmbientView {
     const y = spec.y0 * H;
     const hh = Math.max(1, (spec.y1 - spec.y0) * H);
     const amp = spec.amp * this.dpr;
-    const shift = Math.sin(t * spec.speed) * amp + Math.sin(t * spec.speed * 0.37) * amp * 0.35;
+    const shift = Math.sin(t * spec.speed) * amp + Math.sin(t * spec.speed * 0.37) * amp * 0.4;
+    const extra = Math.abs(shift) + 16;
     ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, y, W, hh);
+    ctx.clip();
     ctx.globalAlpha = spec.alpha;
-    ctx.drawImage(source, 0, y, W, hh, shift, y, W, hh);
-    ctx.restore();
-    ctx.save();
-    ctx.globalAlpha = spec.alpha * 0.45;
-    ctx.drawImage(source, 0, y, W, hh, -shift * 0.6, y + Math.sin(t * 0.4) * 8, W, hh);
+    ctx.drawImage(source, 0, y, W, hh, shift - extra, y, W + extra * 2, hh);
+    ctx.globalAlpha = spec.alpha * 0.5;
+    ctx.drawImage(
+      source,
+      0,
+      y,
+      W,
+      hh,
+      -shift * 0.65 - extra,
+      y + Math.sin(t * spec.speed * 1.3) * 12,
+      W + extra * 2,
+      hh
+    );
     ctx.restore();
   }
 
@@ -409,50 +467,157 @@ class AmbientView {
     const H = source.height;
     const y0 = Math.floor(spec.y0 * H);
     const y1 = Math.floor(spec.y1 * H);
+    const x0 = Math.floor((spec.x0 ?? 0) * W);
+    const x1 = Math.floor((spec.x1 ?? 1) * W);
+    const ww = Math.max(1, x1 - x0);
     const amp = spec.amp * this.dpr;
-    const pad = amp * 2 + 8;
+    const pad = Math.ceil(amp + 8);
+    const freq = spec.freq / this.dpr;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x0, y0, ww, y1 - y0);
+    ctx.clip();
     for (let y = y0; y < y1; y += 2) {
       const fade = (y - y0) / Math.max(1, y1 - y0);
-      const wave =
-        Math.sin(y * (spec.freq / this.dpr) + t * spec.speed) * amp +
-        Math.sin(y * (spec.freq / this.dpr) * 2.3 + t * spec.speed * 1.6) * amp * 0.35;
-      ctx.drawImage(source, 0, y, W, 2, wave * (0.35 + fade * 0.65) - pad, y, W + pad * 2, 2);
+      const swell = Math.sin(y * freq * 0.32 + t * spec.speed * 0.55) * amp * 0.9;
+      const ripple = Math.sin(y * freq + t * spec.speed) * amp * 0.55;
+      const chop = Math.sin(y * freq * 2.5 + t * spec.speed * 1.75) * amp * 0.28;
+      const wave = (swell + ripple + chop) * (0.5 + fade * 0.5);
+      const sx = Math.max(0, x0 - pad);
+      const sw = Math.min(W - sx, ww + pad * 2);
+      ctx.drawImage(source, sx, y, sw, 2, sx + wave, y, sw, 2);
     }
+    ctx.restore();
   }
 
   liveSway(t, spec) {
-    this.liveWater(t, spec);
     const { ctx, source } = this;
     const W = source.width;
     const H = source.height;
     const y0 = Math.floor(spec.y0 * H);
-    const hh = Math.max(1, Math.floor(spec.y1 * H) - y0);
-    const drift = Math.sin(t * spec.speed * 0.45) * spec.amp * this.dpr;
+    const y1 = Math.floor(spec.y1 * H);
+    const hh = Math.max(1, y1 - y0);
+    const x0 = Math.floor((spec.x0 ?? 0) * W);
+    const x1 = Math.floor((spec.x1 ?? 1) * W);
+    const amp = spec.amp * this.dpr;
+    const slice = Math.max(5, Math.round(5 * this.dpr));
+    const step = Math.max(3, Math.round(3 * this.dpr));
+    const freq = spec.freq / this.dpr;
     ctx.save();
-    ctx.globalAlpha = 0.3;
-    ctx.drawImage(source, 0, y0, W, hh, drift, y0, W, hh);
+    ctx.beginPath();
+    ctx.rect(x0, y0, x1 - x0, hh);
+    ctx.clip();
+    for (let x = x0 - Math.ceil(amp) - slice; x < x1 + amp + slice; x += step) {
+      const sx = Math.max(0, Math.min(W - slice, x));
+      const wind =
+        Math.sin(x * freq + t * spec.speed) * amp +
+        Math.sin(x * freq * 1.7 + t * spec.speed * 0.62) * amp * 0.45;
+      const lift = Math.sin(x * freq * 0.5 + t * spec.speed * 0.8) * amp * 0.22;
+      const sy = Math.max(0, y0 - 6);
+      ctx.drawImage(source, sx, sy, slice, hh + 12, x + wind, sy + lift, slice + 1, hh + 12);
+    }
+    if (spec.ghost) {
+      ctx.globalAlpha = 0.28;
+      const drift = Math.sin(t * spec.speed * 0.42) * amp * 0.7;
+      ctx.drawImage(source, x0, y0, x1 - x0, hh, x0 + drift, y0, x1 - x0, hh);
+    }
     ctx.restore();
+  }
+
+  liveFalls(t, spec) {
+    const { ctx, source } = this;
+    const W = source.width;
+    const H = source.height;
+    const x0 = Math.floor(spec.x0 * W);
+    const x1 = Math.floor(spec.x1 * W);
+    const y0 = Math.floor(spec.y0 * H);
+    const y1 = Math.floor(spec.y1 * H);
+    const hh = Math.max(1, y1 - y0);
+    const ww = Math.max(1, x1 - x0);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x0, y0, ww, hh);
+    ctx.clip();
+    for (let y = y0; y < y1; y += 2) {
+      const srcY = Math.min(H - 2, Math.max(0, y + Math.floor(((t * spec.speed * this.dpr + y * 0.4) % 10) - 5)));
+      ctx.drawImage(source, x0, srcY, ww, 2, x0, y, ww, 2);
+    }
+    ctx.restore();
+
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+    for (let i = 0; i < 12; i += 1) {
+      const x = x0 + ((i * 0.09 + t * 0.05) % 1) * ww;
+      const y = y0 + ((t * spec.speed * 0.35 + i * 0.13) % 1) * hh;
+      ctx.strokeStyle = `rgba(230, 245, 255, ${0.3 + (i % 3) * 0.1})`;
+      ctx.lineWidth = 1.6 * this.dpr;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + 2 * this.dpr, y + 22 * this.dpr);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  liveCaustics(t, spec) {
+    const { ctx, w, h } = this;
+    const y0 = spec.y0 * h;
+    const hh = (spec.y1 - spec.y0) * h;
+    const x0 = (spec.x0 ?? 0) * w;
+    const ww = ((spec.x1 ?? 1) - (spec.x0 ?? 0)) * w;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x0, y0, ww, hh);
+    ctx.clip();
+    ctx.globalCompositeOperation = "screen";
+    for (let i = 0; i < 7; i += 1) {
+      const y = y0 + ((i / 7 + t * 0.06) % 1) * hh;
+      const wobble = Math.sin(t * 1.1 + i) * ww * 0.04;
+      const g = ctx.createLinearGradient(0, y - 10, 0, y + 10);
+      g.addColorStop(0, "rgba(160, 220, 255, 0)");
+      g.addColorStop(0.5, `rgba(200, 240, 255, ${0.22 + Math.sin(t * 1.4 + i) * 0.08})`);
+      g.addColorStop(1, "rgba(160, 220, 255, 0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(x0 + wobble, y - 12, ww, 24);
+    }
+    ctx.restore();
+  }
+
+  liveFoam(t, spec) {
+    const { ctx, w, h } = this;
+    const y0 = spec.y0 * h;
+    const span = (spec.y1 - spec.y0) * h;
+    const x0 = (spec.x0 ?? 0) * w;
+    const ww = ((spec.x1 ?? 1) - (spec.x0 ?? 0)) * w;
+    this.foam.forEach((p, i) => {
+      const x = x0 + ((p.x + t * p.v) % 1) * ww;
+      const y = y0 + ((p.y + Math.sin(t * 0.45 + i) * 0.05 + 1) % 1) * span;
+      ctx.fillStyle = `rgba(255,255,255,${0.16 + (i % 3) * 0.08})`;
+      ctx.beginPath();
+      ctx.ellipse(x, y, p.s * 2.4, p.s * 0.7, 0.15, 0, Math.PI * 2);
+      ctx.fill();
+    });
   }
 
   liveRays(t, sun) {
     const { ctx, w, h } = this;
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
-    const pulse = 0.12 + Math.sin(t * 0.7) * 0.04;
-    const g = ctx.createRadialGradient(w * sun.x, h * sun.y, 6, w * sun.x, h * sun.y, w * 0.38);
+    const pulse = 0.14 + Math.sin(t * 0.7) * 0.05;
+    const g = ctx.createRadialGradient(w * sun.x, h * sun.y, 6, w * sun.x, h * sun.y, w * 0.4);
     g.addColorStop(0, `rgba(255, 228, 170, ${pulse})`);
     g.addColorStop(1, "rgba(255, 200, 120, 0)");
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
     ctx.translate(w * sun.x, h * sun.y);
-    ctx.rotate(-0.35 + Math.sin(t * 0.15) * 0.04);
-    ctx.fillStyle = `rgba(255, 220, 160, ${0.035 + Math.sin(t * 0.5) * 0.012})`;
+    ctx.rotate(-0.35 + Math.sin(t * 0.15) * 0.05);
+    ctx.fillStyle = `rgba(255, 220, 160, ${0.045 + Math.sin(t * 0.5) * 0.016})`;
     for (let i = 0; i < 7; i += 1) {
       ctx.rotate(0.22);
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(w * 0.55, -14);
-      ctx.lineTo(w * 0.55, 14);
+      ctx.lineTo(w * 0.55, -16);
+      ctx.lineTo(w * 0.55, 16);
       ctx.fill();
     }
     ctx.restore();
@@ -461,14 +626,14 @@ class AmbientView {
   liveSparkles(t, spec) {
     const { ctx, w, h } = this;
     this.sparkles.forEach((s, i) => {
-      const phase = (s.life + t * 0.55) % 1;
-      if (phase > 0.28) return;
-      const a = Math.sin(phase * Math.PI) * 0.85;
-      const x = ((s.x + t * 0.015) % 1) * w;
+      const phase = (s.life + t * 0.7) % 1;
+      if (phase > 0.45) return;
+      const a = Math.sin(phase * Math.PI) * 0.9;
+      const x = ((s.x + t * 0.02) % 1) * w;
       const y = h * spec.y0 + ((s.y + i * 0.017) % 1) * h * (spec.y1 - spec.y0);
       ctx.fillStyle = `rgba(255,255,255,${a})`;
       ctx.beginPath();
-      ctx.arc(x, y, 1.6, 0, Math.PI * 2);
+      ctx.arc(x, y, 2.1, 0, Math.PI * 2);
       ctx.fill();
     });
   }
@@ -481,7 +646,7 @@ class AmbientView {
       const y = spec.y0 + localY * (spec.y1 - spec.y0);
       const fade = Math.max(0, 1 - localY);
       const g = ctx.createRadialGradient(x * w, y * h, 2, x * w, y * h, puff.r);
-      g.addColorStop(0, `rgba(255, 236, 214, ${0.22 * fade})`);
+      g.addColorStop(0, `rgba(255, 236, 214, ${0.32 * fade})`);
       g.addColorStop(1, "rgba(255, 220, 190, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
@@ -492,8 +657,8 @@ class AmbientView {
 
   liveRain(t) {
     const { ctx, w, h } = this;
-    ctx.strokeStyle = "rgba(210, 230, 245, 0.42)";
-    ctx.lineWidth = 1.3;
+    ctx.strokeStyle = "rgba(210, 230, 245, 0.48)";
+    ctx.lineWidth = 1.4;
     this.rain.forEach((drop) => {
       const x = ((drop.x + t * 0.08) % 1) * w;
       const y = ((drop.y + t * drop.v) % 1) * h;
@@ -503,8 +668,8 @@ class AmbientView {
       ctx.stroke();
     });
     this.beads.forEach((bead, i) => {
-      const y = bead.y * h + (t * 8 + Math.sin(t * 0.4 + i) * 6) % (h * 0.35);
-      ctx.fillStyle = "rgba(200, 230, 255, 0.4)";
+      const y = bead.y * h + ((t * 10 + Math.sin(t * 0.4 + i) * 8) % (h * 0.4));
+      ctx.fillStyle = "rgba(200, 230, 255, 0.5)";
       ctx.beginPath();
       ctx.ellipse(bead.x * w, y, bead.r * 0.7, bead.r, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -516,7 +681,7 @@ class AmbientView {
     this.snow.forEach((flake, i) => {
       const x = ((flake.x + t * flake.w) % 1) * w;
       const y = ((flake.y + t * flake.v) % 1) * h;
-      ctx.fillStyle = `rgba(255,255,255,${0.45 + Math.sin(t + i) * 0.2})`;
+      ctx.fillStyle = `rgba(255,255,255,${0.55 + Math.sin(t + i) * 0.25})`;
       ctx.beginPath();
       ctx.arc(x, y, flake.r, 0, Math.PI * 2);
       ctx.fill();
@@ -526,8 +691,8 @@ class AmbientView {
   liveStars(t) {
     const { ctx, w, h } = this;
     this.stars.forEach((star, i) => {
-      const a = 0.2 + Math.sin(t * star.tw + i) * 0.35;
-      ctx.fillStyle = `rgba(230, 240, 255, ${Math.max(0.08, a)})`;
+      const a = 0.22 + Math.sin(t * star.tw + i) * 0.4;
+      ctx.fillStyle = `rgba(230, 240, 255, ${Math.max(0.1, a)})`;
       ctx.beginPath();
       ctx.arc(star.x * w, star.y * h, star.r, 0, Math.PI * 2);
       ctx.fill();
@@ -536,19 +701,38 @@ class AmbientView {
 
   liveAurora(t) {
     const { ctx, w, h } = this;
-    const a = 0.1 + Math.sin(t * 0.35) * 0.045;
-    const g = ctx.createLinearGradient(0, h * 0.12, w, h * 0.46);
-    g.addColorStop(0, `rgba(70, 230, 170, ${a})`);
-    g.addColorStop(0.45, `rgba(150, 110, 255, ${a * 0.8})`);
-    g.addColorStop(1, "rgba(70, 230, 170, 0)");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h * 0.5);
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+    for (let band = 0; band < 3; band += 1) {
+      const a = 0.16 + Math.sin(t * 0.35 + band) * 0.06;
+      ctx.beginPath();
+      ctx.moveTo(0, h * 0.22);
+      for (let x = 0; x <= w; x += 18) {
+        const y =
+          h *
+          (0.18 +
+            band * 0.06 +
+            Math.sin(x * 0.008 + t * 0.45 + band) * 0.05 +
+            Math.sin(x * 0.02 + t * 0.7) * 0.02);
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(w, h * 0.52);
+      ctx.lineTo(0, h * 0.52);
+      ctx.closePath();
+      const g = ctx.createLinearGradient(0, h * 0.12, w, h * 0.48);
+      g.addColorStop(0, `rgba(70, 230, 170, ${a})`);
+      g.addColorStop(0.45, `rgba(150, 110, 255, ${a * 0.85})`);
+      g.addColorStop(1, "rgba(70, 230, 170, 0)");
+      ctx.fillStyle = g;
+      ctx.fill();
+    }
+    ctx.restore();
   }
 
   livePetals(t, kind) {
     const { ctx, w, h } = this;
     this.petals.forEach((petal, i) => {
-      const x = ((petal.x + Math.sin(t * 0.5 + i) * 0.12) % 1) * w;
+      const x = ((petal.x + Math.sin(t * 0.5 + i) * 0.14 + t * 0.02) % 1) * w;
       const y = ((petal.y + t * petal.v) % 1) * h;
       ctx.save();
       ctx.translate(x, y);
@@ -556,9 +740,9 @@ class AmbientView {
       ctx.fillStyle =
         kind === "maple"
           ? i % 2
-            ? "rgba(210, 70, 40, 0.72)"
-            : "rgba(230, 120, 40, 0.68)"
-          : "rgba(255, 210, 190, 0.7)";
+            ? "rgba(210, 70, 40, 0.82)"
+            : "rgba(230, 120, 40, 0.78)"
+          : "rgba(255, 210, 190, 0.8)";
       ctx.beginPath();
       ctx.ellipse(0, 0, petal.s, petal.s * 0.42, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -570,8 +754,8 @@ class AmbientView {
     const { ctx, w, h } = this;
     this.motes.forEach((m, i) => {
       const x = ((m.x + t * m.v) % 1) * w;
-      const y = ((m.y + Math.sin(t * m.drift + i) * 0.05 + t * 0.012 + 1) % 1) * h;
-      ctx.fillStyle = `rgba(255,255,230,${0.28 + Math.sin(t * 2 + i) * 0.12})`;
+      const y = ((m.y + Math.sin(t * m.drift + i) * 0.06 + t * 0.016 + 1) % 1) * h;
+      ctx.fillStyle = `rgba(255,255,220,${0.38 + Math.sin(t * 2 + i) * 0.16})`;
       ctx.beginPath();
       ctx.arc(x, y, m.r, 0, Math.PI * 2);
       ctx.fill();
@@ -582,17 +766,16 @@ class AmbientView {
     const { ctx, w, h } = this;
     const span = typeof scale === "number" ? scale : 1;
     this.fireflies.forEach((bug, i) => {
-      const x = ((bug.x + Math.sin(t * bug.v + i) * 0.08) % 1) * w;
+      const x = ((bug.x + Math.sin(t * bug.v + i) * 0.1) % 1) * w;
       const y =
-        ((bug.y + Math.cos(t * bug.v * 0.7 + i) * 0.05) % 1) * h * span +
-        h * (1 - span) * 0.12;
-      const a = 0.2 + Math.max(0, Math.sin(t * bug.pulse + i)) * 0.85;
-      const g = ctx.createRadialGradient(x, y, 0, x, y, bug.r * 10);
+        ((bug.y + Math.cos(t * bug.v * 0.7 + i) * 0.06) % 1) * h * span + h * (1 - span) * 0.12;
+      const a = 0.22 + Math.max(0, Math.sin(t * bug.pulse + i)) * 0.9;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, bug.r * 12);
       g.addColorStop(0, `rgba(255, 230, 110, ${a})`);
       g.addColorStop(1, "rgba(255, 200, 60, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(x, y, bug.r * 10, 0, Math.PI * 2);
+      ctx.arc(x, y, bug.r * 12, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = `rgba(255, 250, 180, ${a})`;
       ctx.beginPath();
@@ -603,7 +786,7 @@ class AmbientView {
 
   liveFlicker(t) {
     const { ctx, w, h } = this;
-    const a = 0.035 + Math.sin(t * 9.4) * 0.02 + Math.sin(t * 17.2) * 0.012;
+    const a = 0.045 + Math.sin(t * 9.4) * 0.024 + Math.sin(t * 17.2) * 0.014;
     ctx.fillStyle = `rgba(255, 170, 70, ${Math.max(0, a)})`;
     ctx.fillRect(0, 0, w, h);
   }
